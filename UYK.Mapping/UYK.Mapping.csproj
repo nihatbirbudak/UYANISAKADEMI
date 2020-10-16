@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="AutoMapper" Version="10.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UYK.DTO\UYK.DTO.csproj" />
     <ProjectReference Include="..\UYK.Model\UYK.Model.csproj" />
   </ItemGroup>
 

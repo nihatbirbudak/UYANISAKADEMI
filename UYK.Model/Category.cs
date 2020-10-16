@@ -10,11 +10,11 @@ namespace UYK.Model
         public string Picture { get; set; }
         public bool Active { get; set; }
 
-        public virtual List<Product> Product { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
         public Category()
         {
-            Product = new List<Product>();
+            this.Products = new HashSet<Product>();
         }
     }
 }
