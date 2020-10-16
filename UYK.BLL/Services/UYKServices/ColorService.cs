@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UYK.BLL.Services.Abstract;
 using UYK.Core.Data.UnitOfWork;
 using UYK.DTO;
@@ -73,18 +72,34 @@ namespace UYK.BLL.Services.UYKServices
         /// Its save to new "Color" entity if have not database.
         /// </summary>
         /// <param name="entity">Enter new ColorDTO entity</param>
-        /// <returns>Its return ColorDTO</returns>
+        /// <returns>Its return ColorDTO or null</returns>
         public ColorDTO newEntity(ColorDTO entity)
         {
-            if (!uow.GetRepository<Color>().GetAll().Any(z => z.ColorValue == entity.ColorValue);
+            if (!uow.GetRepository<Color>().GetAll().Any(z => z.ColorValue == entity.ColorValue))
             {
-
+                var added = MapperFactory.CurrentMapper.Map<Color>(entity);
+                added = uow.GetRepository<Color>().Add(added);
+                uow.SaveChanges();
+                return MapperFactory.CurrentMapper.Map<ColorDTO>(added);
+            }
+            else
+            {
+                return null;
             }
         }
 
+        /// <summary>
+        /// It update to color entity according to the entity you give.
+        /// </summary>
+        /// <param name="entity">Give a color entity will be update.</param>
+        /// <returns>Its return ColorDTO</returns>
         public ColorDTO updateEntity(ColorDTO entity)
         {
-            throw new NotImplementedException();
+            var selected = uow.GetRepository<Color>().Get(z => z.Id == entity.ID);
+            selected = MapperFactory.CurrentMapper.Map<Color>(entity);
+            uow.GetRepository<Color>().Update(selected);
+            uow.SaveChanges();
+            return MapperFactory.CurrentMapper.Map<ColorDTO>(selected);
         }
     }
 }
