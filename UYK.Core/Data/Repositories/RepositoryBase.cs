@@ -25,7 +25,7 @@ namespace UYK.Core.Data.Repositories
         }
 
         /// <summary>
-        ///     Delete a entity in your database
+        /// Delete a entity in your database
         /// </summary>
         /// <param name="entity"> Entity </param>
         public void Delete(T entity)
