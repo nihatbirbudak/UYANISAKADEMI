@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using UYK.Core.Entities;
 
@@ -6,16 +7,16 @@ namespace UYK.Model
 {
     public class Product : Entity<int>
     {
+        
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        [ForeignKey("Supplier")]
+        [ForeignKey("SupplierID")]
         public int SupplierID { get; set; }
-        [ForeignKey("Category")]
         public int CategoryID { get; set; }
         public int UnitPrice { get; set; }
-        [ForeignKey("Size")]
+        [ForeignKey("SizeID")]
         public int SizeID { get; set; }
-        [ForeignKey("Color")]
+        [ForeignKey("ColorID")]
         public int ColorID { get; set; }
         public int Discount { get; set; }
         public string Picture { get; set; }
@@ -23,17 +24,11 @@ namespace UYK.Model
         public bool? CurrentOrder { get; set; }
         public int? QuantityPerUnit { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
         public virtual Size Size { get; set; }
         public virtual Color Color { get; set; }
         public virtual Supplier Supplier { get; set; }
-
-        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
-
-        public Product()
-        {
-            this.Categories = new HashSet<Category>();
-        }
+        public ICollection<OrderDetail> OrderDetail { get; set; }
+        public List<ProductCategories> ProductCategories { get; set; }
 
     }
 }

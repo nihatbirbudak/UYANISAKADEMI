@@ -33,7 +33,7 @@ namespace UYK.Model
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
         public DateTime RegistrationDate { get; set; }
-        [ForeignKey("Role")]
+        [ForeignKey("RoleId")]
         public int RoleId { get; set; }
 
         public virtual List<Supplier> Supplier { get; set; }

@@ -21,7 +21,7 @@ namespace UYK.Model
         public string DiscountType { get; set; }
         public int? DiscountRate { get; set; }
         public bool? DiscountAvailable { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerID { get; set; }
         public string Logo { get; set; }
         public string Note { get; set; }

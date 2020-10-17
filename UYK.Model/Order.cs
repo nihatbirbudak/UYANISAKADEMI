@@ -8,14 +8,14 @@ namespace UYK.Model
 {
     public class Order : Entity<int>
     {
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerID { get; set; }
-        [ForeignKey("Payment")]
+        [ForeignKey("PaymentID")]
         public int PaymentID { get; set; }
         public string OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
-        [ForeignKey("Shipper")]
+        [ForeignKey("ShipperID")]
         public int ShipperID { get; set; }
         public int? Freight { get; set; }
         public int? SalesTax { get; set; }

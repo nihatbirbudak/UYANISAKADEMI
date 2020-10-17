@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using UYK.Core.Entities;
 
 namespace UYK.Model
 {
     public class OrderDetail : Entity<int>
     {
-        [ForeignKey("Supplier")]
         public int? SupplierID { get; set; }
-
-        [ForeignKey("Product")]
-        public int ProductID { get; set; }
-        [ForeignKey("Ordered")]
+        public int? ProductID { get; set; }
         public int OrderedID { get; set; }
         public string OrderNumber { get; set; }
         public int Price { get; set; }
@@ -26,10 +19,7 @@ namespace UYK.Model
         public DateTime BillDate { get; set; }
 
         public virtual Supplier Supplier { get; set; }
-
         public virtual Product Product { get; set; }
-
-
         public virtual Ordered Ordered { get; set; }
     }
 }
