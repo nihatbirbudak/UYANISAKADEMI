@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using UYK.Core.Entities;
 
 namespace UYK.Model
 {
-    public class Supplier : Enetity<int>
+    public class Supplier : Entity<int>
     {
         public string CompanyName { get; set; }
         public string ContactFName { get; set; }
