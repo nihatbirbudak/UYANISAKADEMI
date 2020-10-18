@@ -7,7 +7,7 @@ namespace UYK.Model
 {
     public class Ordered : Entity<int>
     {
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerID { get; set; }
         public int OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
