@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UYK.Mapping", "UYK.Mapping\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UYK.BLL", "UYK.BLL\UYK.BLL.csproj", "{F7DC3305-704F-4BFE-AB44-7BE78D29C860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UYK.WebUI.Admin", "UYK.Admin.WebUI\UYK.WebUI.Admin.csproj", "{F0F2D47C-904F-4A3B-A564-F248F3D2BFD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UYK.WebUI.Admin", "UYK.Admin.WebUI\UYK.WebUI.Admin.csproj", "{F0F2D47C-904F-4A3B-A564-F248F3D2BFD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
