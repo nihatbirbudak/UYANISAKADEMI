@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace UYK.Mapping.ConfigProfile
 {
     public class MapperFactory
     {
         private static IMapper _mapper;
-        public static IMapper CurrentMapper { 
-            get { 
-                return _mapper; 
-            } 
-            set { 
-                _mapper = value; 
-            } 
+        public static IMapper CurrentMapper
+        {
+            get
+            {
+                return _mapper;
+            }
+            set
+            {
+                _mapper = value;
+            }
         }
 
         public static void RegisterMappers()

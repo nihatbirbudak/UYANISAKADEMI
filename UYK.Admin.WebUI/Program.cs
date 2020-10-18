@@ -22,5 +22,6 @@ namespace UYK.Admin.WebUI
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+            
     }
 }
