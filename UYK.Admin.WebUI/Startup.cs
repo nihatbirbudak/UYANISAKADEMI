@@ -22,7 +22,7 @@ namespace UYK.Admin.WebUI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            MapperConfing.RegisterMappers();
+            MapperConfing.RegisterMappers(); 
         }
 
         public IConfiguration Configuration { get; }
