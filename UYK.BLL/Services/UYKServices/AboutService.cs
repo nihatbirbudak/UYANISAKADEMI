@@ -65,7 +65,7 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns></returns>
         public List<AboutDTO> getEntityName(string entityTitle)
         {
-            var abouts = uow.GetRepository<About>().Get(z => z.Title == entityTitle);
+            var abouts = uow.GetRepository<About>().Get(z => z.ContentTitle == entityTitle);
             return MapperFactory.CurrentMapper.Map<List<AboutDTO>>(abouts);
         }
 
@@ -76,7 +76,7 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns></returns>
         public AboutDTO newEntity(AboutDTO entity)
         {
-            if (!uow.GetRepository<About>().GetAll().Any(z=> z.Title == entity.Title))
+            if (!uow.GetRepository<About>().GetAll().Any(z=> z.ContentTitle == entity.ContentTitle))
             {
                 var added = MapperFactory.CurrentMapper.Map<About>(entity);
                 added = uow.GetRepository<About>().Add(added);

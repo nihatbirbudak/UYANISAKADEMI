@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using UYK.Core.Entities;
 
 namespace UYK.Model
@@ -17,12 +16,13 @@ namespace UYK.Model
         public string PostalCode { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string CreditCard { get; set; }
-        public int CardExpMo { get; set; }
-        public int CardExpYr { get; set; }
+        public int? CardExpMo { get; set; }
+        public int? CardExpYr { get; set; }
         public string CreditCardTypeID { get; set; }
         public string BillingAddress { get; set; }
         public string BillingCity { get; set; }
@@ -32,9 +32,10 @@ namespace UYK.Model
         public string ShipCity { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public DateTime? RegistrationDate { get; set; }
         [ForeignKey("RoleId")]
         public int RoleId { get; set; }
+        public bool RememberMe { get; set; }
 
         public virtual List<Supplier> Supplier { get; set; }
         public virtual List<Order> Orders { get; set; }
