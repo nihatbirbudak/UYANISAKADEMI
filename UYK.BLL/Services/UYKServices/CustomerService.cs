@@ -160,5 +160,10 @@ namespace UYK.BLL.Services.UYKServices
         {
             throw new NotImplementedException();
         }
+
+        public void changeRememberMe(CustomerDTO customerDTO)
+        {
+            
+        }
     }
 }
