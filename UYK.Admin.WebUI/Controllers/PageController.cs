@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
 
 namespace UYK.WebUI.Admin.Controllers
 {
-    public class PageController : Controller
+    [Authorize(Roles = "Admin,Manager")]
+    public class PageController : BaseController
     {
         private IAboutService aboutService;
         public PageController(IAboutService aboutService)
@@ -22,13 +24,27 @@ namespace UYK.WebUI.Admin.Controllers
 
         public IActionResult AboutAdd()
         {
-            return View();
+            if (aboutService.getAll() == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("AboutUpdate");
+            }
+            
         }
         [HttpPost]
         public  IActionResult AboutAdd(AboutDTO aboutDTO)
         {
             aboutService.newEntity(aboutDTO);
             return RedirectToAction("AboutList");
+        }
+        public IActionResult AboutUpdate(AboutDTO aboutDTO)
+        {
+            
+            var model = aboutService.getAll();
+            return View(model);
         }
     }
 }
