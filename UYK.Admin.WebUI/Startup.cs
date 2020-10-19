@@ -71,6 +71,8 @@ namespace UYK.Admin.WebUI
                      config.AccessDeniedPath = "/AccessDenied";
                  });
 
+            
+
             services.AddAuthorization(config =>
             {
                 config.AddPolicy("UserPolicy", policyBuilder =>

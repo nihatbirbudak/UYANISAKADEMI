@@ -10,5 +10,6 @@ namespace UYK.BLL.Services.Abstract
     {
         CustomerDTO FindwithUsernameandMail(string mailorUserName, string Password);
         List<CustomerDTO> getAllUserinRole(int CustomerId);
+        void changeRememberMe(CustomerDTO customerDTO);
     }
 }
