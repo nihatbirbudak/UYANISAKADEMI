@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_header" />
+    @RenderSection("BeginPage", false)
+</head>
+<body class="hold-transition skin-info dark-sidebar fixed sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <header class="main-header">
+            <partial name="_navbar" />
+        </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar-->
+            <partial name="_sidebar" />
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="reverse-mode">
+                <!-- left content -->
+                <!-- /.left content -->
+                <!-- right content -->
+                @RenderBody()
+                <!-- /.right content -->
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Footer -->
+        <partial name="_footer" />
+        <!-- /.footer end -->
+
+    </div>
+    @RenderSection("FooterJsPlugin", false)
+
+    @RenderSection("BeginPageJs", false)
+
+    <partial name="_scripts" />
+</body>
+</html>

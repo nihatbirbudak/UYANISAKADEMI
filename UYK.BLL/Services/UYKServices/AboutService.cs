@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UYK.BLL.Services.Abstract;
 using UYK.Core.Data.UnitOfWork;
-using UYK.Core.Services.Abstract;
 using UYK.DTO;
 using UYK.Mapping.ConfigProfile;
 using UYK.Model;

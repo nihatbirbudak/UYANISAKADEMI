@@ -7,12 +7,12 @@ using UYK.Core.Entities;
 
 namespace UYK.Core.Data.UnitOfWork
 {
-    public class UnitOfWork : IUnitofWork
+    public class UnitofWork : IUnitofWork
     {
         private readonly DbContext context;
         private Dictionary<Type, object> repositories;
 
-        public UnitOfWork(DbContext _context)
+        public UnitofWork(DbContext _context)
         {
             context = _context;
             repositories = repositories ?? new Dictionary<Type, object>();

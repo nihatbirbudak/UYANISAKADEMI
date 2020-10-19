@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using UYK.Core.Entities;
 
 namespace UYK.Model
 {
-    public class Supplier : Enetity<int>
+    public class Supplier : Entity<int>
     {
         public string CompanyName { get; set; }
         public string ContactFName { get; set; }
@@ -22,7 +21,7 @@ namespace UYK.Model
         public string DiscountType { get; set; }
         public int? DiscountRate { get; set; }
         public bool? DiscountAvailable { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerID { get; set; }
         public string Logo { get; set; }
         public string Note { get; set; }
