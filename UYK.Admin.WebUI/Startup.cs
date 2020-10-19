@@ -14,6 +14,10 @@ using UYK.BLL.Services.Abstract;
 using UYK.BLL.Services.UYKServices;
 using UYK.Core.Data.UnitOfWork;
 using UYK.Mapping.ConfigProfile;
+using UYK.Model;
+using UYK.WebUI.Admin.CustomHandler;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UYK.Admin.WebUI
 {
@@ -35,7 +39,13 @@ namespace UYK.Admin.WebUI
             //Dependency Injection
             services.AddSingleton<IUnitofWork, UnitofWork>();
             services.AddSingleton<IAboutService, AboutService>();
-            //DbContext Config Setup
+            services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<IRoleService, RoleService>();
+
+
+
+
+            //DbContext Settings
             var optionBuilder = new DbContextOptionsBuilder<UykDbContext>();
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("UykDbContext"));
             optionBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -48,8 +58,26 @@ namespace UYK.Admin.WebUI
                 context.Database.Migrate();
             }
 
-            
-            services.AddMvc();
+
+            //Login Settings
+            services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
+
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Login";
+                     config.AccessDeniedPath = "/AccessDenied";
+                 });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy("UserPolicy", policyBuilder =>
+                 {
+                     policyBuilder.UserRequireCustomClaim(ClaimTypes.Email);
+                 });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +103,16 @@ namespace UYK.Admin.WebUI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "Login",
+                    pattern: "Login",
+                    defaults: new { controller = "Login", action = "UserLogin" });
+
+                endpoints.MapControllerRoute(
+                     name: "AccessDenied",
+                     pattern: "AccessDenied",
+                     defaults: new { controller = "Login", action = "AccessDenied" });
+
                 endpoints.MapControllerRoute(
                     name: "AboutList",
                     pattern: "Page/About",

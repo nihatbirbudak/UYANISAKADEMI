@@ -8,5 +8,7 @@ namespace UYK.BLL.Services.Abstract
 {
     public interface ICustomerService : IServiceBase<CustomerDTO>
     {
+        CustomerDTO FindwithUsernameandMail(string mailorUserName, string Password);
+        List<CustomerDTO> getAllUserinRole(int CustomerId);
     }
 }

@@ -9,10 +9,10 @@ using UYK.Model;
 
 namespace UYK.BLL.Services.UYKServices
 {
-    public class CutomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly IUnitofWork uow;
-        public CutomerService(IUnitofWork uow)
+        public CustomerService(IUnitofWork uow)
         {
             this.uow = uow;
         }
@@ -137,6 +137,28 @@ namespace UYK.BLL.Services.UYKServices
         {
             var selectList = uow.GetRepository<Customer>().Get(z => z.Country == country);
             return MapperFactory.CurrentMapper.Map<List<CustomerDTO>>(selectList);
+        }
+
+        /// <summary>
+        /// get user in db
+        /// </summary>
+        /// <param name="mailorUserName"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        public CustomerDTO FindwithUsernameandMail(string mailorUserName, string Password)
+        {
+            var getCustomer = uow.GetRepository<Customer>().Get(z => z.Email == mailorUserName || z.UserName == mailorUserName && z.Password == Password);
+            return MapperFactory.CurrentMapper.Map<CustomerDTO>(getCustomer);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CustomerId"></param>
+        /// <returns></returns>
+        public List<CustomerDTO> getAllUserinRole(int CustomerId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
