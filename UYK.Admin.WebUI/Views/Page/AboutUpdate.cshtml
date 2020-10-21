@@ -1,4 +1,4 @@
-﻿@model UYK.DTO.AboutDTO
+﻿@model AboutViewModel
 
 @{
     ViewData["Title"] = "AboutUpdate";
@@ -14,36 +14,36 @@
         <form asp-action="AboutUpdate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="AboutDTO.Id" class="control-label"></label>
+                <input asp-for="AboutDTO.Id" class="form-control" />
+                <span asp-validation-for="AboutDTO.Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContentTitle" class="control-label"></label>
-                <input asp-for="ContentTitle" class="form-control" />
-                <span asp-validation-for="ContentTitle" class="text-danger"></span>
+                <label asp-for="AboutDTO.ContentTitle" class="control-label"></label>
+                <input asp-for="AboutDTO.ContentTitle" class="form-control" />
+                <span asp-validation-for="AboutDTO.ContentTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <textarea class="textarea" asp-for="Content" placeholder="Place some text here"
+                <label asp-for="AboutDTO.Content" class="control-label"></label>
+                <textarea class="textarea" asp-for="AboutDTO.Content" placeholder="Place some text here"
                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                <span asp-validation-for="Content" class="text-danger"></span>
+                <span asp-validation-for="AboutDTO.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Content2Title" class="control-label"></label>
-                <input asp-for="Content2Title" class="form-control" />
-                <span asp-validation-for="Content2Title" class="text-danger"></span>
+                <label asp-for="AboutDTO.Content2Title" class="control-label"></label>
+                <input asp-for="AboutDTO.Content2Title" class="form-control" />
+                <span asp-validation-for="AboutDTO.Content2Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Content2" class="control-label"></label>
-                <textarea class="textarea" asp-for="Content2" placeholder="Place some text here"
+                <label asp-for="AboutDTO.Content2" class="control-label"></label>
+                <textarea class="textarea" asp-for="AboutDTO.Content2" placeholder="Place some text here"
                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                <span asp-validation-for="Content2" class="text-danger"></span>
+                <span asp-validation-for="AboutDTO.Content2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="image" class="control-label"></label>
-                <input asp-for="image" class="form-control" />
-                <span asp-validation-for="image" class="text-danger"></span>
+                <label asp-for="AboutDTO.image" class="control-label"></label>
+                <input asp-for="AboutDTO.image" class="form-control" />
+                <span asp-validation-for="AboutDTO.image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -56,6 +56,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

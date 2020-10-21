@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
+using UYK.WebUI.Admin.Models;
 
 namespace UYK.WebUI.Admin.Controllers
 {
@@ -15,18 +18,13 @@ namespace UYK.WebUI.Admin.Controllers
             this.aboutService = aboutService;
         }
 
-        public IActionResult AboutList()
-        {
-            List<AboutDTO> modelList = new List<AboutDTO>();
-            modelList = aboutService.getAll();
-            return View(modelList);
-        }
-
         public IActionResult AboutAdd()
         {
-            if (aboutService.getAll() == null)
+            if (aboutService.getAll().ToList().Count() == 0)
             {
-                return View();
+                var model = new AboutViewModel();
+                model.CurrentUser = CurrentUser;
+                return View(model);
             }
             else
             {
@@ -37,13 +35,16 @@ namespace UYK.WebUI.Admin.Controllers
         [HttpPost]
         public  IActionResult AboutAdd(AboutDTO aboutDTO)
         {
+            aboutDTO.CustomerId = CurrentUser.ID;
+            aboutDTO.UpdateDate = DateTime.UtcNow;
             aboutService.newEntity(aboutDTO);
-            return RedirectToAction("AboutList");
+            return RedirectToAction("AboutUpdate");
         }
         public IActionResult AboutUpdate(AboutDTO aboutDTO)
         {
-            
-            var model = aboutService.getAll();
+            var model = new AboutViewModel();
+            model.CurrentUser = CurrentUser;
+            model.AboutDTO = aboutService.getAll()[0];
             return View(model);
         }
     }

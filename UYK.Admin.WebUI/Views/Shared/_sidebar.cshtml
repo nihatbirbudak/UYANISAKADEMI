@@ -4,72 +4,145 @@
     <!-- sidebar menu-->
     <ul class="sidebar-menu" data-widget="tree">
 
-        <li class="header nav-small-cap">PERSONAL NAME</li>
         <!-- Sayfa İşlemleri -->
+        <li class="header nav-small-cap">Sayfa İşlemleri</li>
+        <!-- Hakkımızda -->
         <li class="treeview">
             <a href="#">
                 <i class="ti-dashboard"></i>
-                <span>Sayfa İşlemleri</span>
+                <span>Hakkımızda Sayfası</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a asp-controller="Page" asp-action="AboutList"><i class="ti-more"></i>Hakkımızda</a></li>
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Hakkımızda Ekle</a></li>
-                <li><a href="#"><i class="ti-more"></i>Etkinlik Takvimi</a></li>
-                <li><a href="#"><i class="ti-more"></i>İletişim</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Düzenle</a></li>
             </ul>
         </li>
-        <!-- Eğitim İşlemleri -->
+        <!-- İletişim -->
         <li class="treeview">
             <a href="#">
-                <i class="ti-files"></i>
-                <span>Eğitim İşlmeleri</span>
+                <i class="ti-dashboard"></i>
+                <span>İletişim Sayfası</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="#"><i class="ti-more"></i>Eğitimler</a></li>
-                <li><a href="#"><i class="ti-more"></i>Eğtim Ekle</a></li>
-                <li><a href="#"><i class="ti-more"></i>Eğitimleri Düzenle</a></li>
-            </ul>
-        </li>
-        <!-- Ürün İşlemleri -->
-        <li class="treeview">
-            <a href="#">
-                <i class="ti-direction-alt"></i>
-                <span>Ürün İşlemleri </span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-right pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="#"><i class="ti-more"></i>Ürün Listesi </a></li>
-                <li><a href="#"><i class="ti-more"></i>Ürün Düzenle</a></li>
-                <li><a href="#"><i class="ti-more"></i>Ürün Ekle </a></li>
-                <li><a href="#"><i class="ti-more"></i></a></li>
+                <li><a asp-controller="Page" asp-action="ContactAdd"><i class="ti-more"></i>Düzenle</a></li>
             </ul>
         </li>
 
-        <!-- Bölme Başlık İşlemleri-->
-        <li class="header nav-small-cap">Admin İşlemleri</li>
-        <!-- Muhasebe İşlemleri-->
+        <!-- Eğitim İşlemleri -->
+        <li class="header nav-small-cap">Eğitim İşlemleri</li>
+        <!-- Eğitimler Ekle / Listele -->
         <li class="treeview">
             <a href="#">
-                <i class="ti-email"></i> <span>Muhasebe İşlemleri</span>
+                <i class="ti-dashboard"></i>
+                <span>Eğitim Sayfa İşlemleri</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="#"><i class="ti-more"></i>Inbox</a></li>
-                <li><a href="#"><i class="ti-more"></i>Compose</a></li>
-                <li><a href="#"><i class="ti-more"></i>Read</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ekle</a></li>
             </ul>
         </li>
+        <!-- Ders Ekle / Listele -->
+        <li class="treeview">
+            <a href="#">
+                <i class="ti-dashboard"></i>
+                <span>Ders Oluşturma</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Dersleri Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ders Oluştur</a></li>
+            </ul>
+        </li>
+
+
+        <!-- Seans İşlemleri -->
+        <li class="header nav-small-cap">Seans İşlemleri</li>
+        <!-- Seans Ekle / Listele -->
+        <li class="treeview">
+            <a href="#">
+                <i class="ti-dashboard"></i>
+                <span>Seans Sayfa İşlemleri</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ekle</a></li>
+            </ul>
+        </li>
+        <!-- Seans Ekle / Listele -->
+        <li class="treeview">
+            <a href="#">
+                <i class="ti-dashboard"></i>
+                <span>Seans Oluşturma</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Dersleri Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ders Oluştur</a></li>
+            </ul>
+        </li>
+
+
+        <!-- Çalışma İşlemleri -->
+        <li class="header nav-small-cap">Çalışma İşlemleri</li>
+        <!-- Seans Ekle / Listele -->
+        <li class="treeview">
+            <a href="#">
+                <i class="ti-dashboard"></i>
+                <span>Çalışma Sayfa İşlemleri</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ekle</a></li>
+            </ul>
+        </li>
+        <!-- Seans Ekle / Listele -->
+        <li class="treeview">
+            <a href="#">
+                <i class="ti-dashboard"></i>
+                <span>Çalışma Oluşturma</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Dersleri Listele</a></li>
+                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ders Oluştur</a></li>
+            </ul>
+        </li>
+
+
+        <!-- Muhasebe İşlemleri-->
+        <li class="header nav-small-cap">Muhasebe İşlemleri</li>
+
+        <li>
+            <a asp-controller="Login" asp-action="Logout">
+                <i class="ti-power-off"></i>
+                <span>Muhasebe</span>
+            </a>
+        </li>
+
+
         <!-- Yetki İşlemleri-->
+        <li class="header nav-small-cap">Kullanıcı İşlemleri</li>
+
         <li class="treeview">
             <a href="#">
                 <i class="ti-user"></i>
@@ -79,10 +152,10 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="#"><i class="ti-more"></i>Chat app</a></li>
-                <li><a href="#"><i class="ti-more"></i>Contact / Employee</a></li>
-                <li><a href="#"><i class="ti-more"></i>Userlist Grid</a></li>
-                <li><a href="#"><i class="ti-more"></i>Userlist</a></li>
+                <li><a href="#"><i class="ti-more"></i>Kullanıcılar</a></li>
+                <li><a href="#"><i class="ti-more"></i>Yetkililer</a></li>
+                <li><a href="#"><i class="ti-more"></i>Yetkinlikleri Düzenle</a></li>
+                <li><a href="#"><i class="ti-more"></i>Yetkinlik Ekle</a></li>
             </ul>
         </li>
 

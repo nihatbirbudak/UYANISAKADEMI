@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UYK.Admin.WebUI.Models;
+using UYK.WebUI.Admin.Controllers;
+using UYK.WebUI.Admin.Models;
 
 namespace UYK.Admin.WebUI.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -22,7 +24,9 @@ namespace UYK.Admin.WebUI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new IndexViewModel();
+            model.CurrentUser = CurrentUser;
+            return View(model);
         }
 
         public IActionResult Privacy()

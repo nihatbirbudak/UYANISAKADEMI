@@ -1,47 +1,88 @@
-﻿@model AboutDTO
+﻿@model AboutViewModel
 
 @{
     ViewData["Title"] = "AboutAdd";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>AboutAdd</h1>
+<section class="content">
 
-<h4>AboutDTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AboutAdd">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Hakkımızda</h4>
+                </div>
+                <div class="box-body">
+                    <form asp-action="AboutAdd">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.ContentTitle"></label>
+                                        <input type="text" class="form-control" placeholder="Product Name" asp-for="AboutDTO.ContentTitle">
+                                    </div>
+                                </div>
+
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content"></label>
+                                        <textarea class="form-control p-20" rows="4" asp-for="AboutDTO.Content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content2Title"></label>
+                                        <input type="text" class="form-control" asp-for="AboutDTO.Content2Title">
+                                    </div>
+                                </div>
+
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content2"></label>
+                                        <textarea class="form-control p-20" rows="4" asp-for="AboutDTO.Content2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+
+
+
+                            <div class="row">
+                                <!--/span-->
+                                <div class="col-md-3">
+                                    <h4 class="box-title mt-20">Resim Yükle</h4>
+                                    <div class="product-img text-left">
+                                        <img src="../../images/product/product-9.png" alt="">
+                                        <div class="btn btn-lg btn-info mb-20">
+                                            <span>Upload Anonther Image</span>
+                                            <input type="file" class="upload">
+                                        </div>
+                                        <button class="btn btn-sm btn-success btn-circle"><i class="mdi mdi-check"></i></button>
+                                        <button class="btn btn-sm btn-danger btn-circle"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions mt-10">
+                            <button type="submit" class="btn btn-lg btn-primary"> <i class="fa fa-check"></i> Save</button>
+                            <button type="button" class="btn btn-lg btn-danger">Cancel</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ContentTitle" class="control-label"></label>
-                <input asp-for="ContentTitle" class="form-control" />
-                <span asp-validation-for="ContentTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="image" class="control-label"></label>
-                <input asp-for="image" class="form-control" />
-                <span asp-validation-for="image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 
 

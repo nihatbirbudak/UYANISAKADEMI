@@ -37,7 +37,7 @@ namespace UYK.WebUI.Admin.Controllers
                 user.RoleDTO = roleService.getEntity((int)user.RoleId);
                 var userClaims = new List<Claim>()
                 {
-                       new Claim("UserDTO",UYKConvert.UYKJsonSerialize(user)),
+                       new Claim("CustomerDTO",UYKConvert.UYKJsonSerialize(user)),
                        new Claim("Kullanıcı","Adamın Dibi")
                 };
                 var userIdentity = new ClaimsIdentity(userClaims, "User Identity");

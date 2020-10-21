@@ -1,4 +1,8 @@
-﻿<!-- Logo -->
+﻿@{ 
+    var fullName = Model.CurrentUser.FirstName + " " + Model.CurrentUser.LastName;
+}
+
+<!-- Logo -->
 <a href="../index.html" class="logo">
     <!-- mini logo -->
     <div class="logo-mini">
@@ -110,22 +114,22 @@
                         <div class="flexbox align-self-center">
                             <img src="~/images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">
                             <h4 class="user-name align-self-center">
-                                <span>Samuel Brus</span>
-                                <small>samuel@gmail.com</small>
+                                <span>@fullName</span>
+                                <small>@Model.CurrentUser.Email</small>
                             </h4>
                         </div>
                     </li>
                     <!-- Menu Body -->
                     <li class="user-body">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> My Profile</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My Balance</a>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i>Profilim</a>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i>My Balance</a>
                         <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i> Inbox</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Account Setting</a>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Ayarlar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i> Logout</a>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i>Güvenli Çıkış</a>
                         <div class="dropdown-divider"></div>
-                        <div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">View Profile</a></div>
+                        <div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">Profil</a></div>
                     </li>
                 </ul>
             </li>
@@ -133,7 +137,7 @@
 
             <!-- Control Sidebar Toggle Button -->
             <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-cog fa-spin"></i></a>
+                <a href="#" ><i class="fa fa-cog fa-spin"></i></a>
             </li>
 
         </ul>

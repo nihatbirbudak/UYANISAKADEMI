@@ -6,11 +6,9 @@ using UYK.DTO;
 
 namespace UYK.WebUI.Admin.Models
 {
-    public class LoginViewModel : IBaseViewModel
+    public class AboutViewModel : IBaseViewModel
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public bool RememberMe { get; set; }
         public CustomerDTO CurrentUser { get; set; }
+        public AboutDTO AboutDTO { get; set; }
     }
 }
