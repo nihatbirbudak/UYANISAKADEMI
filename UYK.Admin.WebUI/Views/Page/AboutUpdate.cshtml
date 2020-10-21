@@ -3,56 +3,94 @@
 @{
     ViewData["Title"] = "AboutUpdate";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var fullName = Model.UpdatedUser.FirstName.ToUpper() + " " + Model.UpdatedUser.LastName.ToUpper();
 }
 
-<h1>AboutUpdate</h1>
 
-<h4>AboutDTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AboutUpdate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.Id" class="control-label"></label>
-                <input asp-for="AboutDTO.Id" class="form-control" />
-                <span asp-validation-for="AboutDTO.Id" class="text-danger"></span>
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h2 class="box-title">Hakkımızda</h2>
+                    <div class=" float-right">
+                        <p>Son Güncelleyen :@fullName</p>
+                        <p>Son Güncelleme :@Model.AboutDTO.UpdateDate.Date.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form asp-action="AboutUpdate" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <input asp-for="AboutDTO.Id" type="hidden"/>
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.ContentTitle"></label>
+                                        <input type="text" class="form-control" placeholder="Product Name" asp-for="AboutDTO.ContentTitle">
+                                        <span asp-validation-for="AboutDTO.ContentTitle"></span>
+                                    </div>
+                                </div>
+
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content"></label>
+                                        <textarea class="form-control p-20" rows="7" asp-for="AboutDTO.Content"></textarea>
+                                        <span asp-validation-for="AboutDTO.Content"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content2Title"></label>
+                                        <input type="text" class="form-control" asp-for="AboutDTO.Content2Title">
+                                        <span asp-validation-for="AboutDTO.Content2Title"></span>
+                                    </div>
+                                </div>
+
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content2"></label>
+                                        <textarea class="form-control p-20" rows="7" asp-for="AboutDTO.Content2"></textarea>
+                                        <span asp-validation-for="AboutDTO.Content2"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+
+                            <input asp-for="AboutDTO.image" type="hidden" />
+
+                            <div class="row">
+                                <!--/span-->
+                                <div class="col-md-3">
+                                    <h4 class="box-title mt-20">Resim Yükle</h4>
+                                    <div class="product-img text-left">
+                                        <img src="~/images/MyImg/@Model.AboutDTO.image" alt="">
+                                        <div class="btn btn-lg btn-info mb-20">
+                                            <span>Upload Anonther Image</span>
+                                            <input type="file" asp-for="File" class="upload">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions mt-10">
+                            <button type="submit" class="btn btn-lg btn-primary"> <i class="fa fa-check"></i> Update</button>
+                            <button type="button" class="btn btn-lg btn-danger">Cancel</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.ContentTitle" class="control-label"></label>
-                <input asp-for="AboutDTO.ContentTitle" class="form-control" />
-                <span asp-validation-for="AboutDTO.ContentTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.Content" class="control-label"></label>
-                <textarea class="textarea" asp-for="AboutDTO.Content" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                <span asp-validation-for="AboutDTO.Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.Content2Title" class="control-label"></label>
-                <input asp-for="AboutDTO.Content2Title" class="form-control" />
-                <span asp-validation-for="AboutDTO.Content2Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.Content2" class="control-label"></label>
-                <textarea class="textarea" asp-for="AboutDTO.Content2" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                <span asp-validation-for="AboutDTO.Content2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AboutDTO.image" class="control-label"></label>
-                <input asp-for="AboutDTO.image" class="form-control" />
-                <span asp-validation-for="AboutDTO.image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+</section>

@@ -41,6 +41,7 @@ namespace UYK.Admin.WebUI
             services.AddSingleton<IAboutService, AboutService>();
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddSingleton<IRoleService, RoleService>();
+            services.AddSingleton<IContactService, ContactService>();
 
 
 

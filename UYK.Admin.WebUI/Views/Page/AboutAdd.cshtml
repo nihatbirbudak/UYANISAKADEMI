@@ -14,13 +14,13 @@
                     <h4 class="box-title">Hakkımızda</h4>
                 </div>
                 <div class="box-body">
-                    <form asp-action="AboutAdd">
+                    <form asp-action="AboutAdd" enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="font-weight-700 font-size-16" asp-for="AboutDTO.ContentTitle"></label>
-                                        <input type="text" class="form-control" placeholder="Product Name" asp-for="AboutDTO.ContentTitle">
+                                        <input type="text" class="form-control" asp-for="AboutDTO.ContentTitle">
                                     </div>
                                 </div>
 
@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content"></label>
-                                        <textarea class="form-control p-20" rows="4" asp-for="AboutDTO.Content"></textarea>
+                                        <textarea class="form-control p-20" rows="7" asp-for="AboutDTO.Content"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="font-weight-700 font-size-16" asp-for="AboutDTO.Content2"></label>
-                                        <textarea class="form-control p-20" rows="4" asp-for="AboutDTO.Content2"></textarea>
+                                        <textarea class="form-control p-20" rows="7" asp-for="AboutDTO.Content2"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -64,10 +64,8 @@
                                         <img src="../../images/product/product-9.png" alt="">
                                         <div class="btn btn-lg btn-info mb-20">
                                             <span>Upload Anonther Image</span>
-                                            <input type="file" class="upload">
+                                            <input type="file" asp-for="File" class="upload">
                                         </div>
-                                        <button class="btn btn-sm btn-success btn-circle"><i class="mdi mdi-check"></i></button>
-                                        <button class="btn btn-sm btn-danger btn-circle"><i class="mdi mdi-close"></i></button>
                                     </div>
                                 </div>
                             </div>

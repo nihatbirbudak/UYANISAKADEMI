@@ -43,6 +43,7 @@ namespace UYK.DAL
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Ordered> Ordereds { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
     }
 }

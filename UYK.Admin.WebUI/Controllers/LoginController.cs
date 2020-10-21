@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
+using UYK.Model;
 using UYK.WebUI.Admin.Core;
 using UYK.WebUI.Admin.Models;
 
@@ -26,6 +27,7 @@ namespace UYK.WebUI.Admin.Controllers
         
         public ActionResult UserLogin()
         {
+            Seed();
             return View();
         }
         [HttpPost]
@@ -68,6 +70,24 @@ namespace UYK.WebUI.Admin.Controllers
         public ActionResult AccessDenied()
         {
             return View();
+        }
+
+
+        public void Seed()
+        {
+            var role = new RoleDTO();
+            role.RoleName = "Admin";
+            roleService.newEntity(role);
+            var admin = new CustomerDTO 
+            { 
+                FirstName ="Nihat",
+                LastName ="Birbudak",
+                Email ="nihat@mail.com",
+                Password ="1234",
+                UserName ="nbirbudak",
+                RoleId =1,
+            };
+            customerService.newEntity(admin);
         }
     }
 }
