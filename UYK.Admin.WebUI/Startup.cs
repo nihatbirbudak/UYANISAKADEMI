@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,7 +9,6 @@ using UYK.BLL.Services.Abstract;
 using UYK.BLL.Services.UYKServices;
 using UYK.Core.Data.UnitOfWork;
 using UYK.Mapping.ConfigProfile;
-using UYK.Model;
 using UYK.WebUI.Admin.CustomHandler;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +36,9 @@ namespace UYK.Admin.WebUI
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddSingleton<IRoleService, RoleService>();
             services.AddSingleton<IContactService, ContactService>();
-
+            services.AddSingleton<ICourseCategoryTypeService, CourseCategoryTypeService>();
+            services.AddSingleton<ICourseService, CourseService>();
+            services.AddSingleton<IClassTypeService, ClassTypeService>();
 
 
 

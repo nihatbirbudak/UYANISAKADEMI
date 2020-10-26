@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
-using UYK.Model;
 using UYK.WebUI.Admin.Core;
 using UYK.WebUI.Admin.Models;
 
@@ -19,10 +17,16 @@ namespace UYK.WebUI.Admin.Controllers
         
         private readonly ICustomerService customerService;
         private readonly IRoleService roleService;
-        public LoginController(ICustomerService _customerService, IRoleService _roleService)
+        private readonly ICourseService courseService;
+        private readonly ICourseCategoryTypeService courseCategoryTypeService;
+        private readonly IClassTypeService classTypeService;
+        public LoginController(ICustomerService _customerService, IRoleService _roleService, ICourseService courseService, ICourseCategoryTypeService courseCategoryTypeService,IClassTypeService classTypeService)
         {
             customerService = _customerService;
             roleService = _roleService;
+            this.courseService = courseService;
+            this.courseCategoryTypeService = courseCategoryTypeService;
+            this.classTypeService = classTypeService;
         }
         
         public ActionResult UserLogin()
@@ -39,8 +43,7 @@ namespace UYK.WebUI.Admin.Controllers
                 user.RoleDTO = roleService.getEntity((int)user.RoleId);
                 var userClaims = new List<Claim>()
                 {
-                       new Claim("CustomerDTO",UYKConvert.UYKJsonSerialize(user)),
-                       new Claim("Kullanıcı","Adamın Dibi")
+                       new Claim("CustomerDTO",UYKConvert.UYKJsonSerialize(user))
                 };
                 var userIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
@@ -88,6 +91,34 @@ namespace UYK.WebUI.Admin.Controllers
                 RoleId =1,
             };
             customerService.newEntity(admin);
+            if (courseCategoryTypeService.getAll().Count() == 0)
+            {
+                List<CourseCategoryTypeDTO> ccType = new List<CourseCategoryTypeDTO>()
+                {
+                   new CourseCategoryTypeDTO { CategoryName = "Eğtim" },
+                   new CourseCategoryTypeDTO { CategoryName = "Seminler" },
+                   new CourseCategoryTypeDTO { CategoryName = "Seans" }
+                };
+                foreach (var item in ccType)
+                {
+                    courseCategoryTypeService.newEntity(item);
+                }
+                classTypeService.newEntity(new ClassTypeDTO { ClassName = "ONline" });
+                List<CourseDTO> courseDTOs = new List<CourseDTO>()
+                {
+                    new CourseDTO{CourseName="Access Bars",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Reiki",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Reiki Çalışması",CourseCategoryTypeId=2, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Birebir",CourseCategoryTypeId=3, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="İnsan Olma",CourseCategoryTypeId=2, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Numeroloji",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Çakra",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
+                };
+                foreach (var item in courseDTOs)
+                {
+                    courseService.newEntity(item);
+                }
+            }
         }
     }
 }
