@@ -6,6 +6,6 @@ namespace UYK.Core.Entities
 {
     public abstract class EntityBase
     {
-
+        
     }
 }

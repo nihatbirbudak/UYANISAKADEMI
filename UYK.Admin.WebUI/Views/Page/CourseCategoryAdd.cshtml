@@ -1,0 +1,104 @@
+﻿@model CourseCategoryTypeViewModel
+
+@{
+    ViewData["Title"] = "AddCourseCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Eğitim Kategorisi Ekle</h4>
+                </div>
+                <div class="box-body">
+                    <form asp-action="CourseCategoryAdd">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="courseCategoryTypeDTO.CategoryName"></label>
+                                        <input type="text" class="form-control" asp-for="courseCategoryTypeDTO.CategoryName">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt-4">
+                                    <button type="submit" class="btn btn-md btn-primary mt-2"> <i class="fa fa-check"></i> Save</button>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--  Listeleme  -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Eğitim Kategori Listesi</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(z => z.courseCategoryTypeDTO.CategoryName)</th>
+                                        <th>Kayıtlı Kategori Sayısı</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.courseCategoryTypeDTOs)
+                                    {
+                                        if (item.Id == Model.ChangeId)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <form asp-action="CourseCategoryEdit" method="post">
+                                                        <input type="hidden" asp-for="@Model.courseCategoryTypeDTO.Id" value="@item.Id" />
+                                                        <input asp-for="@Model.courseCategoryTypeDTO.CategoryName" type="text" value="@item.CategoryName">
+                                                        <button type="submit" class="btn btn-outline-primary btn-sm"> Kaydet </button>
+                                                        <a href="/Page/CourseCategoryAdd" type="button" class="btn btn-outline-danger btn-sm"> İptal </a>
+                                                    </form>
+
+                                                </td>
+                                                <td>
+                                                    @Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value
+                                                </td>
+                                                <td>
+                                                    <a asp-action="CourseCategoryDelete" asp-route-id="@item.Id">
+                                                        <span class="glyphicon glyphicon-remove">Sil</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td><a asp-action="CourseCategoryAdd" asp-route-id="@item.Id">@item.CategoryName</a></td>
+                                                <td>@Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value</td>
+                                                <td>
+                                                    <a asp-action="CourseCategoryDelete" asp-route-id="@item.Id">
+                                                        <span class="glyphicon glyphicon-remove">Sil</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+

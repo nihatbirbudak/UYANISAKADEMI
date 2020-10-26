@@ -44,6 +44,9 @@ namespace UYK.DAL
         public DbSet<Ordered> Ordereds { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseCategoryType> CourseCategoryTypes { get; set; }
+        public DbSet<ClassType> ClassTypes { get; set; }
 
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
+using UYK.Model;
 using UYK.WebUI.Admin.Models;
 
 namespace UYK.WebUI.Admin.Controllers
@@ -17,11 +18,15 @@ namespace UYK.WebUI.Admin.Controllers
         private IAboutService aboutService;
         private ICustomerService customerService;
         private IContactService contactService;
-        public PageController(IAboutService aboutService, ICustomerService customerService, IContactService contactService)
+        private ICourseCategoryTypeService courseCategoryTypeService;
+        private ICourseService courseService;
+        public PageController(IAboutService aboutService, ICustomerService customerService, IContactService contactService, ICourseCategoryTypeService courseCategoryTypeService, ICourseService courseService)
         {
             this.aboutService = aboutService;
             this.customerService = customerService;
             this.contactService = contactService;
+            this.courseCategoryTypeService = courseCategoryTypeService;
+            this.courseService = courseService;
         }
 
         #region About Setting
@@ -107,6 +112,55 @@ namespace UYK.WebUI.Admin.Controllers
             return RedirectToAction("UpdateUser");
         }
         #endregion
+
+        #region Course Category Setting
+        [HttpGet]
+        public IActionResult CourseCategoryAdd(int id)
+        {
+            CourseCategoryTypeViewModel model = new CourseCategoryTypeViewModel();
+            model.CurrentUser = CurrentUser;
+            model.courseCategoryTypeDTOs = courseCategoryTypeService.getAll();
+            model.ChangeId = id;
+            Dictionary<int, int> catCount = new Dictionary<int, int>();
+            foreach (var type in courseService.getCategoryCount())
+            {
+                int key = type.Key;
+                var value = type.Value.Count();
+                catCount.Add(key, value);
+            }
+            model.CategoryCount = catCount;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult CourseCategoryAdd(CourseCategoryTypeDTO courseCategoryTypeDTO)
+        {
+            courseCategoryTypeService.newEntity(courseCategoryTypeDTO);
+            return RedirectToAction("CourseCategoryAdd");
+        }
+        public IActionResult CourseCategoryDelete(int id)
+        {
+            Dictionary<int, int> catCount = new Dictionary<int, int>();
+            foreach (var type in courseService.getCategoryCount())
+            {
+                int key = type.Key;
+                var value = type.Value.Count();
+                catCount.Add(key, value);
+            }
+            if (!catCount.ContainsKey(id))
+            {
+                courseCategoryTypeService.deleteEntity(id);
+            }
+            return RedirectToAction("CourseCategoryAdd");
+        }
+        [HttpPost]
+        public IActionResult CourseCategoryEdit(CourseCategoryTypeDTO courseCategoryTypeDTO)
+        {
+            courseCategoryTypeService.updateEntity(courseCategoryTypeDTO);
+            return RedirectToAction("CourseCategoryAdd");
+        } 
+        #endregion
+
+
 
 
 
