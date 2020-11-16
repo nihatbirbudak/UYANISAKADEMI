@@ -1,0 +1,173 @@
+﻿@model CourseViewModel
+
+@{
+    ViewData["Title"] = "CourseAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Kurs Oluşturucu</h4>
+                </div>
+                <div class="box-body">
+                    <form asp-action="CourseAdd">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="CourseDTO.CourseName"></label>
+                                        <input type="text" class="form-control" asp-for="CourseDTO.CourseName">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="CourseDTO.CourseTitle"></label>
+                                        <input type="text" class="form-control" asp-for="CourseDTO.CourseTitle">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="CourseDTO.CourseCategoryTypeId"></label>
+                                        <select class="form-control" data-placeholder="Kategori Seçin" tabindex="1" asp-for="CourseDTO.CourseCategoryTypeDTO">
+                                            @foreach (var category in Model.CourseCategoryTypeDTOs)
+                                            {
+                                                <option value=@category.Id.ToString()>@category.CategoryName</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="CourseDTO.ClassTypeDTOs"></label>
+                                        <div class="demo-checkbox">
+                                            @foreach (var classType in Model.ClassTypeDTOs)
+                                            {
+                                                <input name="CourseList" type="checkbox" id="@("basic_checkbox_" + classType.Id)" value="@classType.Id">
+                                                <label for="@("basic_checkbox_" + classType.Id)">@classType.ClassName</label>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16">Price</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-money"></i></div>
+                                            <input type="text" class="form-control" placeholder="270">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16">Discount</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-cut"></i></div>
+                                            <input type="text" class="form-control" placeholder="50%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16">Product Description</label>
+                                        <textarea class="form-control p-20" rows="4">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16">Meta Title</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16">Meta Keyword</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-3">
+                                    <h4 class="box-title mt-20">Upload Image</h4>
+                                    <div class="product-img text-left">
+                                        <img src="../../images/product/product-9.png" alt="">
+                                        <div class="btn btn-lg btn-info mb-20">
+                                            <span>Upload Anonther Image</span>
+                                            <input type="file" class="upload">
+                                        </div>
+                                        <button class="btn btn-lg btn-success">Edit</button>
+                                        <button class="btn btn-lg btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="box-title mt-40">General Info</h4>
+                                    <div class="table-responsive">
+                                        <table class="table no-border td-padding">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Brand">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Sellar">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Delivery Condition">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Knock Down">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Color">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" placeholder="Gift Pack">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions mt-10">
+                            <button type="submit" class="btn btn-lg btn-primary"> <i class="fa fa-check"></i> Save</button>
+                            <button type="button" class="btn btn-lg btn-danger">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

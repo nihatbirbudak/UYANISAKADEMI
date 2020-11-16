@@ -1,0 +1,132 @@
+﻿
+@model CourseClassTypeViewModel;
+
+@{
+    ViewData["Title"] = "addClassType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4 class="box-title">Eğitim Kategorisi Ekle</h4>
+                </div>
+                <div class="box-body">
+                    <form asp-action="ClassTypeAdd">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="classTypeDTO.ClassName"></label>
+                                        <input type="text" class="form-control" asp-for="classTypeDTO.ClassName">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="classTypeDTO.ClassContent"></label>
+                                        <input type="text" class="form-control" asp-for="classTypeDTO.ClassContent">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt-4">
+                                    <button type="submit" class="btn btn-md btn-primary mt-2"> <i class="fa fa-check"></i> Save</button>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--  Listeleme  -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Eğitim Kategori Listesi</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <form asp-action="ClassTypeEdit" method="post">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(z => z.classTypeDTO.ClassName)</th>
+                                            <th>Açıklama</th>
+                                            <th>Kayıtlı Kategori Sayısı</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.classTypeDTOs != null)
+                                        {
+                                            @foreach (var item in Model.classTypeDTOs)
+                                            {
+                                                if (item.Id == Model.ChangeID)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <input type="hidden" asp-for="@Model.classTypeDTO.Id" value="@item.Id" />
+                                                            <input asp-for="@Model.classTypeDTO.ClassName" type="text" value="@item.ClassName">
+                                                        </td>
+                                                        <td>
+                                                            <input asp-for="@Model.classTypeDTO.ClassContent" type="text" value="@item.ClassContent">
+                                                        </td>
+                                                        <td>
+                                                            @Model.ClassCount.FirstOrDefault(z => z.Key == item.Id).Value
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" class="btn btn-outline-primary btn-sm"> Kaydet </button>
+                                                            <a href="/Page/ClassTypeDelete" type="button" class="btn btn-outline-danger btn-sm"> İptal </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td><a asp-action="ClassTypeAdd" asp-route-id="@item.Id">@item.ClassName</a></td>
+                                                        <td><a asp-action="ClassTypeAdd" asp-route-id="@item.Id">@item.ClassContent</a></td>
+                                                        <td>@Model.ClassCount.FirstOrDefault(z => z.Key == item.Id).Value</td>
+                                                        <td>
+                                                            <a asp-action="ClassTypeDelete" asp-route-id="@item.Id">
+                                                                <span class="glyphicon glyphicon-remove">Sil</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                          
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section BeginPageJs {
+    <script>
+
+    </script>
+}
+
+
+
+
+
+

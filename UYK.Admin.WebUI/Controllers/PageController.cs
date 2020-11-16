@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UYK.BLL.Services.Abstract;
 using UYK.DTO;
-using UYK.Model;
 using UYK.WebUI.Admin.Models;
 
 namespace UYK.WebUI.Admin.Controllers
@@ -20,13 +19,15 @@ namespace UYK.WebUI.Admin.Controllers
         private IContactService contactService;
         private ICourseCategoryTypeService courseCategoryTypeService;
         private ICourseService courseService;
-        public PageController(IAboutService aboutService, ICustomerService customerService, IContactService contactService, ICourseCategoryTypeService courseCategoryTypeService, ICourseService courseService)
+        private IClassTypeService classTypeService;
+        public PageController(IClassTypeService classTypeService,IAboutService aboutService, ICustomerService customerService, IContactService contactService, ICourseCategoryTypeService courseCategoryTypeService, ICourseService courseService)
         {
             this.aboutService = aboutService;
             this.customerService = customerService;
             this.contactService = contactService;
             this.courseCategoryTypeService = courseCategoryTypeService;
             this.courseService = courseService;
+            this.classTypeService = classTypeService;
         }
 
         #region About Setting
@@ -131,6 +132,7 @@ namespace UYK.WebUI.Admin.Controllers
             model.CategoryCount = catCount;
             return View(model);
         }
+
         [HttpPost]
         public IActionResult CourseCategoryAdd(CourseCategoryTypeDTO courseCategoryTypeDTO)
         {
@@ -157,7 +159,70 @@ namespace UYK.WebUI.Admin.Controllers
         {
             courseCategoryTypeService.updateEntity(courseCategoryTypeDTO);
             return RedirectToAction("CourseCategoryAdd");
-        } 
+        }
+        #endregion
+        
+        #region Course Class
+        public IActionResult ClassTypeAdd(int id)
+        {
+            CourseClassTypeViewModel model = new CourseClassTypeViewModel();
+            model.CurrentUser = CurrentUser;
+            model.classTypeDTOs = classTypeService.getAll();
+            model.ChangeID = id;
+            Dictionary<int, int> classCount = new Dictionary<int, int>();
+            foreach (var type in courseService.getClassCount())
+            {
+                int key = type.Key;
+                var value = type.Value.Count();
+                classCount.Add(key, value);
+            }
+            model.ClassCount = classCount;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ClassTypeAdd(ClassTypeDTO classTypeDTO)
+        {
+            classTypeService.newEntity(classTypeDTO);
+            return RedirectToAction("ClassTypeAdd");
+        }
+        public IActionResult ClassTypeDelete(int id)
+        {
+            Dictionary<int, int> clasCount = new Dictionary<int, int>();
+            foreach (var type in courseService.getClassCount())
+            {
+                int key = type.Key;
+                var value = type.Value.Count();
+                clasCount.Add(key, value);
+            }
+            if (!clasCount.ContainsKey(id))
+            {
+                classTypeService.deleteEntity(id);
+            }
+            return RedirectToAction("ClassTypeAdd");
+        }
+        [HttpPost]
+        public IActionResult ClassTypeEdit(ClassTypeDTO classTypeDTO)
+        {
+            classTypeService.updateEntity(classTypeDTO);
+            return RedirectToAction("ClassTypeAdd");
+        }
+        #endregion
+
+        #region Course Setting
+
+        public IActionResult CourseAdd()
+        {
+            CourseViewModel model = new CourseViewModel();
+            model.CurrentUser = CurrentUser;
+            model.CourseCategoryTypeDTOs = courseCategoryTypeService.getAll();
+            model.ClassTypeDTOs = classTypeService.getAll();
+            return View(model);
+        }
+        public IActionResult CourseList()
+        {
+            return View();
+        }
+
         #endregion
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using UYK.Core.Entities;
 
@@ -16,9 +17,8 @@ namespace UYK.Model
         public DateTime UpdateTime { get; set; }
         public bool IsApply { get; set; }
 
-        [ForeignKey("ClassTypeId")]
-        public int ClassTypeId { get; set; }
-        public ClassType ClassType { get; set; }
+        public virtual List<CourseClassTpye> CourseClassTpyes { get; set; }
+
 
         [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
