@@ -19,7 +19,6 @@ namespace UYK.BLL.Services.UYKServices
         private CourseCategoryTypeDTO mapDTO(CourseCategoryType main) => MapperFactory.CurrentMapper.Map<CourseCategoryTypeDTO>(main);
         private List<CourseCategoryTypeDTO> mapDTO(List<CourseCategoryType> main) => MapperFactory.CurrentMapper.Map<List<CourseCategoryTypeDTO>>(main);
         private CourseCategoryType map(CourseCategoryTypeDTO dto) => MapperFactory.CurrentMapper.Map<CourseCategoryType>(dto);
-        private List<CourseCategoryType> map(List<CourseCategoryTypeDTO> dto) => MapperFactory.CurrentMapper.Map<List<CourseCategoryType>>(dto);
 
         public List<CourseCategoryTypeDTO> getAll()
         {

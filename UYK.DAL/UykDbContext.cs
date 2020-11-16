@@ -22,12 +22,30 @@ namespace UYK.DAL
                 .HasOne(z => z.Product)
                 .WithMany(m => m.ProductCategories)
                 .HasForeignKey(f => f.ProductId);
-
             modelBuilder.Entity<ProductCategories>()
                 .HasOne(z => z.Category)
                 .WithMany(m => m.ProductCategories)
                 .HasForeignKey(z => z.CategoryId);
+
+            modelBuilder.Entity<Course>()
+                .HasKey(z => z.Id);
+            modelBuilder.Entity<ClassType>()
+                .HasKey(z => z.Id);
+            modelBuilder.Entity<CourseClassTpye>()
+                .HasKey(z => new { z.CourseId, z.ClassTypeId });
+            modelBuilder.Entity<CourseClassTpye>()
+                .HasOne(z => z.Course)
+                .WithMany(m => m.CourseClassTpyes)
+                .HasForeignKey(f => f.CourseId);
+            modelBuilder.Entity<CourseClassTpye>()
+                .HasOne(z => z.ClassType)
+                .WithMany(m => m.CourseClassTpyes)
+                .HasForeignKey(f => f.ClassTypeId);
+
+            
         }
+
+       
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<Category> Categories { get; set; }

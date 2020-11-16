@@ -35,17 +35,17 @@
         <!-- Eğitimler Ekle / Listele -->
         <li class="treeview">
             <a href="#">
-                <i class="ti-dashboard"></i>
+                <i class="ti-write"></i>
                 <span>Eğitim Sayfa İşlemleri</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
+                <li><a asp-controller="Page" asp-action="CourseAdd"><i class="ti-more"></i>Eğitim Ekle</a></li>
+                <li><a asp-controller="Pade" asp-action="CourseList"><i class="ti-more"></i>Eğitimleri Listele</a></li>
                 <li><a asp-controller="Page" asp-action="CourseCategoryAdd"><i class="ti-more"></i>Kategoriler</a></li>
-                <li><a asp-controller="Page" asp-action="CourseCategoryAdd"><i class="ti-more"></i>Sınıf Tipleri</a></li>
-                <li><a asp-controller="" asp-action=""><i class="ti-more"></i>Eğitimleri Listele</a></li>
-                <li><a asp-controller="" asp-action=""><i class="ti-more"></i>Eğitim Ekle</a></li>
+                <li><a asp-controller="Page" asp-action="ClassTypeAdd"><i class="ti-more"></i>Sınıf Tipleri</a></li>
             </ul>
         </li>
         <!-- Seans Ekle / Listele -->

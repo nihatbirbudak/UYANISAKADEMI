@@ -9,5 +9,7 @@ namespace UYK.Model
     {
         public string ClassName { get; set; }
         public string ClassContent { get; set; }
+
+        public virtual List<CourseClassTpye> CourseClassTpyes { get; set; }
     }
 }

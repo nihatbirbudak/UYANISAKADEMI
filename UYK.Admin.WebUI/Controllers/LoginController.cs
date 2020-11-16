@@ -106,13 +106,13 @@ namespace UYK.WebUI.Admin.Controllers
                 classTypeService.newEntity(new ClassTypeDTO { ClassName = "ONline" });
                 List<CourseDTO> courseDTOs = new List<CourseDTO>()
                 {
-                    new CourseDTO{CourseName="Access Bars",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Reiki",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Reiki Çalışması",CourseCategoryTypeId=2, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Birebir",CourseCategoryTypeId=3, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="İnsan Olma",CourseCategoryTypeId=2, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Numeroloji",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Çakra",CourseCategoryTypeId=1, ClassTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Access Bars",CourseCategoryTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Reiki",CourseCategoryTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Reiki Çalışması",CourseCategoryTypeId=2,CustomerId=1},
+                    new CourseDTO{CourseName="Birebir",CourseCategoryTypeId=3,CustomerId=1},
+                    new CourseDTO{CourseName="İnsan Olma",CourseCategoryTypeId=2,CustomerId=1},
+                    new CourseDTO{CourseName="Numeroloji",CourseCategoryTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Çakra",CourseCategoryTypeId=1,CustomerId=1},
                 };
                 foreach (var item in courseDTOs)
                 {

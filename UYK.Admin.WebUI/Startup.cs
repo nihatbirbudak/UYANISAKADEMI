@@ -122,6 +122,8 @@ namespace UYK.Admin.WebUI
                     pattern: "Page/About/Add",
                     defaults: new { controller = "Page", Action = "AboutAdd" });
 
+                
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

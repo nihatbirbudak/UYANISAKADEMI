@@ -17,10 +17,16 @@
                     <form asp-action="CourseCategoryAdd">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="font-weight-700 font-size-16" asp-for="courseCategoryTypeDTO.CategoryName"></label>
                                         <input type="text" class="form-control" asp-for="courseCategoryTypeDTO.CategoryName">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="font-weight-700 font-size-16" asp-for="courseCategoryTypeDTO.Description"></label>
+                                        <input type="text" class="form-control" asp-for="courseCategoryTypeDTO.Description">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mt-4">
@@ -39,55 +45,56 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>@Html.DisplayNameFor(z => z.courseCategoryTypeDTO.CategoryName)</th>
-                                        <th>Kayıtlı Kategori Sayısı</th>
-                                        <th>İşlemler</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.courseCategoryTypeDTOs)
-                                    {
-                                        if (item.Id == Model.ChangeId)
+                            <form asp-action="CourseCategoryEdit" method="post">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(z => z.courseCategoryTypeDTO.CategoryName)</th>
+                                            <th>Açıklama</th>
+                                            <th>Kayıtlı Kategori Sayısı</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.courseCategoryTypeDTOs)
                                         {
-                                            <tr>
-                                                <td>
-                                                    <form asp-action="CourseCategoryEdit" method="post">
+                                            if (item.Id == Model.ChangeId)
+                                            {
+                                                <tr>
+                                                    <td>
                                                         <input type="hidden" asp-for="@Model.courseCategoryTypeDTO.Id" value="@item.Id" />
                                                         <input asp-for="@Model.courseCategoryTypeDTO.CategoryName" type="text" value="@item.CategoryName">
+                                                    </td>
+                                                    <td>
+                                                        <input asp-for="@Model.courseCategoryTypeDTO.Description" type="text" value="@item.Description">
+                                                    </td>
+                                                    <td>
+                                                        @Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value
+                                                    </td>
+                                                    <td>
                                                         <button type="submit" class="btn btn-outline-primary btn-sm"> Kaydet </button>
                                                         <a href="/Page/CourseCategoryAdd" type="button" class="btn btn-outline-danger btn-sm"> İptal </a>
-                                                    </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td><a asp-action="CourseCategoryAdd" asp-route-id="@item.Id">@item.CategoryName</a></td>
+                                                    <td><a asp-action="CourseCategoryAdd" asp-route-id="@item.Id">@item.Description</a></td>
+                                                    <td>@Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value</td>
+                                                    <td>
+                                                        <a asp-action="CourseCategoryDelete" asp-route-id="@item.Id">
+                                                            <span class="glyphicon glyphicon-remove">Sil</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
 
-                                                </td>
-                                                <td>
-                                                    @Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value
-                                                </td>
-                                                <td>
-                                                    <a asp-action="CourseCategoryDelete" asp-route-id="@item.Id">
-                                                        <span class="glyphicon glyphicon-remove">Sil</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
                                         }
-                                        else
-                                        {
-                                            <tr>
-                                                <td><a asp-action="CourseCategoryAdd" asp-route-id="@item.Id">@item.CategoryName</a></td>
-                                                <td>@Model.CategoryCount.FirstOrDefault(z => z.Key == item.Id).Value</td>
-                                                <td>
-                                                    <a asp-action="CourseCategoryDelete" asp-route-id="@item.Id">
-                                                        <span class="glyphicon glyphicon-remove">Sil</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    }
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -101,4 +108,13 @@
     </div>
 
 </section>
+
+@section BeginPageJs {
+    <script>
+        
+    </script>
+}
+
+
+
 

@@ -147,7 +147,7 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns></returns>
         public CustomerDTO FindwithUsernameandMail(string mailorUserName, string Password)
         {
-            var getCustomer = uow.GetRepository<Customer>().Get(z => z.Email == mailorUserName || z.UserName == mailorUserName && z.Password == Password);
+            var getCustomer = uow.GetRepository<Customer>().Get(z => z.Password == Password && z.Email == mailorUserName || z.UserName == mailorUserName);
             return MapperFactory.CurrentMapper.Map<CustomerDTO>(getCustomer);
         }
 
