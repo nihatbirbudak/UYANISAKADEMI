@@ -100,13 +100,13 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns></returns>
         public Dictionary<int,IEnumerable<int>> getClassCount()
         {
-            //var list = uow.GetRepository<Course>().GetAll().ToList();
-            //if (!list.Count().Equals(0))
-            //{
-            //    var list2 = list.GroupBy(z => z.ClassTypeId);
-            //    var list3 = list2.ToDictionary(z => z.Key, z => z.Select(y => y.ClassTypeId));
-            //    return list3;
-            //}
+            var list = uow.GetRepository<Course>().Get(null, z => z.CourseClassTpyes,null,null,null);
+            if (!list.Count().Equals(0))
+            {
+                var list2 = list.GroupBy(z => z.CourseClassTpyes);
+                var list3 = list2.ToDictionary(z => z.Key, z => z.Select(y => y.ClassTypeId));
+                return list3;
+            }
             return null;
         }
         
