@@ -25,9 +25,10 @@ namespace UYK.DTO
         public DateTime UpdateTime { get; set; }
         [Display(Name = "Yayında mı?")]
         public bool IsApply { get; set; }
+        public string Image { get; set; }
 
         [Display(Name ="Kurs Sınıfı")]
-        public List<ClassTypeDTO> ClassTypeDTOs { get; set; }
+        public virtual List<ClassTypeDTO> ClassTypeDTOs { get; set; }
 
         public int CustomerId { get; set; }
         public CustomerDTO CustomerDTO { get; set; }

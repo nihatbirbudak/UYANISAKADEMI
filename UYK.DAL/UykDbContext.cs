@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 using UYK.Model;
 
 namespace UYK.DAL
@@ -32,7 +33,14 @@ namespace UYK.DAL
             modelBuilder.Entity<ClassType>()
                 .HasKey(z => z.Id);
             modelBuilder.Entity<CourseClassTpye>()
-                .HasKey(z => new { z.CourseId, z.ClassTypeId });
+                .HasKey(z => new { z.CourseId, z.ClassTypeId, z.Id });
+            modelBuilder.Entity<CourseClassTpye>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
+                
+                
+                
+                
             modelBuilder.Entity<CourseClassTpye>()
                 .HasOne(z => z.Course)
                 .WithMany(m => m.CourseClassTpyes)
@@ -41,6 +49,7 @@ namespace UYK.DAL
                 .HasOne(z => z.ClassType)
                 .WithMany(m => m.CourseClassTpyes)
                 .HasForeignKey(f => f.ClassTypeId);
+                
 
             
         }

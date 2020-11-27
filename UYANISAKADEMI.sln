@@ -17,6 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UYK.BLL", "UYK.BLL\UYK.BLL.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UYK.WebUI.Admin", "UYK.Admin.WebUI\UYK.WebUI.Admin.csproj", "{F0F2D47C-904F-4A3B-A564-F248F3D2BFD6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C29F4843-A7A2-4337-B220-C8F0EC3E1BE3}"
+	ProjectSection(SolutionItems) = preProject
+		ToDo.txt = ToDo.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

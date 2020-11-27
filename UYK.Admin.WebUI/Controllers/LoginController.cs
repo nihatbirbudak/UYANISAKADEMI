@@ -104,15 +104,16 @@ namespace UYK.WebUI.Admin.Controllers
                     courseCategoryTypeService.newEntity(item);
                 }
                 classTypeService.newEntity(new ClassTypeDTO { ClassName = "ONline" });
+                List<ClassTypeDTO> ctd = new List<ClassTypeDTO>();
                 List<CourseDTO> courseDTOs = new List<CourseDTO>()
                 {
-                    new CourseDTO{CourseName="Access Bars",CourseCategoryTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Reiki",CourseCategoryTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Reiki Çalışması",CourseCategoryTypeId=2,CustomerId=1},
-                    new CourseDTO{CourseName="Birebir",CourseCategoryTypeId=3,CustomerId=1},
-                    new CourseDTO{CourseName="İnsan Olma",CourseCategoryTypeId=2,CustomerId=1},
-                    new CourseDTO{CourseName="Numeroloji",CourseCategoryTypeId=1,CustomerId=1},
-                    new CourseDTO{CourseName="Çakra",CourseCategoryTypeId=1,CustomerId=1},
+                    new CourseDTO{CourseName="Access Bars",CourseCategoryTypeId=1,CustomerId=1 , ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="Reiki",CourseCategoryTypeId=1,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="Reiki Çalışması",CourseCategoryTypeId=2,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="Birebir",CourseCategoryTypeId=3,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="İnsan Olma",CourseCategoryTypeId=2,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="Numeroloji",CourseCategoryTypeId=1,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
+                    new CourseDTO{CourseName="Çakra",CourseCategoryTypeId=1,CustomerId=1, ClassTypeDTOs = new List<ClassTypeDTO> { classTypeService.getAll()[0] }},
                 };
                 foreach (var item in courseDTOs)
                 {

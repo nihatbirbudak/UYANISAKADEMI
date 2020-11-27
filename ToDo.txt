@@ -1,0 +1,3 @@
+        // Eðitim ekleme ve düzenleme kýsmýndaki resim updatei tamamla.
+        // Eðitim düzenle post kýsmýný ayarla düzenleyip kaydedemiyorum.
+        // 

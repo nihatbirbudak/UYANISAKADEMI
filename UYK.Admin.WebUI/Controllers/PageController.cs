@@ -20,7 +20,7 @@ namespace UYK.WebUI.Admin.Controllers
         private ICourseCategoryTypeService courseCategoryTypeService;
         private ICourseService courseService;
         private IClassTypeService classTypeService;
-        public PageController(IClassTypeService classTypeService,IAboutService aboutService, ICustomerService customerService, IContactService contactService, ICourseCategoryTypeService courseCategoryTypeService, ICourseService courseService)
+        public PageController(IClassTypeService classTypeService, IAboutService aboutService, ICustomerService customerService, IContactService contactService, ICourseCategoryTypeService courseCategoryTypeService, ICourseService courseService)
         {
             this.aboutService = aboutService;
             this.customerService = customerService;
@@ -43,7 +43,7 @@ namespace UYK.WebUI.Admin.Controllers
             {
                 return RedirectToAction("AboutUpdate");
             }
-            
+
         }
         [HttpPost]
         public IActionResult AboutAdd(AboutDTO aboutDTO, IFormFile file)
@@ -54,7 +54,7 @@ namespace UYK.WebUI.Admin.Controllers
             aboutService.newEntity(aboutDTO);
             return RedirectToAction("AboutUpdate");
         }
-  
+
         public IActionResult AboutUpdate()
         {
             var model = new AboutViewModel();
@@ -66,7 +66,7 @@ namespace UYK.WebUI.Admin.Controllers
         [HttpPost]
         public IActionResult AboutUpdate(AboutDTO aboutDTO, IFormFile file)
         {
-            if (aboutDTO.image != null)
+            if (aboutDTO.Image != null)
             {
                 DeleteFile(file, aboutDTO);
             }
@@ -82,7 +82,7 @@ namespace UYK.WebUI.Admin.Controllers
         #region Contact Setting
         public IActionResult ContactAdd()
         {
-            if (contactService.getAll().ToList().Count() == 0 )
+            if (contactService.getAll().ToList().Count() == 0)
             {
                 var model = new ContactViewModel();
                 model.CurrentUser = CurrentUser;
@@ -161,7 +161,7 @@ namespace UYK.WebUI.Admin.Controllers
             return RedirectToAction("CourseCategoryAdd");
         }
         #endregion
-        
+
         #region Course Class
         public IActionResult ClassTypeAdd(int id)
         {
@@ -169,14 +169,7 @@ namespace UYK.WebUI.Admin.Controllers
             model.CurrentUser = CurrentUser;
             model.classTypeDTOs = classTypeService.getAll();
             model.ChangeID = id;
-            Dictionary<int, int> classCount = new Dictionary<int, int>();
-            foreach (var type in courseService.getClassCount())
-            {
-                int key = type.Key;
-                var value = type.Value.Count();
-                classCount.Add(key, value);
-            }
-            model.ClassCount = classCount;
+            model.ClassCount = classTypeService.getClassCount();
             return View(model);
         }
         [HttpPost]
@@ -187,16 +180,11 @@ namespace UYK.WebUI.Admin.Controllers
         }
         public IActionResult ClassTypeDelete(int id)
         {
-            Dictionary<int, int> clasCount = new Dictionary<int, int>();
-            foreach (var type in courseService.getClassCount())
-            {
-                int key = type.Key;
-                var value = type.Value.Count();
-                clasCount.Add(key, value);
-            }
-            if (!clasCount.ContainsKey(id))
+            var clasCount = classTypeService.getClassCount();
+            if (clasCount.FirstOrDefault(z => z.Key == id ).Value.Equals(0))
             {
                 classTypeService.deleteEntity(id);
+                return RedirectToAction("ClassTypeAdd");
             }
             return RedirectToAction("ClassTypeAdd");
         }
@@ -218,18 +206,46 @@ namespace UYK.WebUI.Admin.Controllers
             model.ClassTypeDTOs = classTypeService.getAll();
             return View(model);
         }
-        public IActionResult CourseList()
+        [HttpPost]
+        public IActionResult CourseAdd(CourseDTO courseDTO, List<int> CourseList, IFormFile File)
         {
-            return View();
+            courseDTO.ClassTypeDTOs = new List<ClassTypeDTO>();
+            foreach (var id in CourseList)
+            {
+                var s = classTypeService.getEntity(id);
+                courseDTO.ClassTypeDTOs.Add(s);
+            }
+            AddFile(File, courseDTO);
+            courseDTO.CustomerId = CurrentUser.ID;
+            courseDTO.UpdateTime = DateTime.UtcNow;
+            courseService.newEntity(courseDTO);
+            return RedirectToAction("CourseAdd");
         }
+        public IActionResult CourseList() 
+        {
+            var model = new CourseViewModel();
+            model.CurrentUser = CurrentUser;
+            model.CourseDTOs = courseService.getAll();
+            model.ClassTypeDTOs = classTypeService.getAll();
+            model.CourseCategoryTypeDTOs = courseCategoryTypeService.getAll();
+            return View(model);
+        }
+        public IActionResult CourseDetail(int id)
+        {
+            var model = new CourseViewModel();
+            model.CurrentUser = CurrentUser;
+            model.CourseDTO = courseService.getEntity(id);
+            model.CourseCategoryTypeDTOs = courseCategoryTypeService.getAll();
+            model.ClassTypeDTOs = classTypeService.getAll();
+            return View(model);
+        }
+        
 
         #endregion
 
 
 
-
-
-        #region Used Method
+        #region  Methods
         public async void AddFile(IFormFile file, AboutDTO aboutDTO)
         {
             if (file != null)
@@ -237,7 +253,21 @@ namespace UYK.WebUI.Admin.Controllers
                 var extention = Path.GetExtension(file.FileName);
                 var randomName = string.Format($"{Guid.NewGuid()}{extention}");
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", randomName);
-                aboutDTO.image = randomName;
+                aboutDTO.Image = randomName;
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
+        }
+        public async void AddFile(IFormFile file, CourseDTO courseDTO)
+        {
+            if (file != null)
+            {
+                var extention = Path.GetExtension(file.FileName);
+                var randomName = string.Format($"{Guid.NewGuid()}{extention}");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", randomName);
+                courseDTO.Image = randomName;
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
@@ -245,9 +275,19 @@ namespace UYK.WebUI.Admin.Controllers
             }
         }
 
-        public void DeleteFile(IFormFile file , AboutDTO aboutDTO)
+        public void DeleteFile(IFormFile file, CourseDTO courseDTO)
         {
-            var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", aboutDTO.image);
+            var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", courseDTO.Image);
+            FileInfo fi = new FileInfo(pathDelete);
+            if (fi != null)
+            {
+                System.IO.File.Delete(pathDelete);
+                fi.Delete();
+            }
+        }
+        public void DeleteFile(IFormFile file, AboutDTO aboutDTO)
+        {
+            var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", aboutDTO.Image);
             FileInfo fi = new FileInfo(pathDelete);
             if (fi != null)
             {

@@ -11,6 +11,5 @@ namespace UYK.BLL.Services.Abstract
     public interface ICourseService : IServiceBase<CourseDTO>
     {
         public Dictionary<int, IEnumerable<int>> getCategoryCount();
-        public Dictionary<int, IEnumerable<int>> getClassCount();
     }
 }

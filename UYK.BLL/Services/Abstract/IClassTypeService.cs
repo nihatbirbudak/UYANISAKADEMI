@@ -8,5 +8,6 @@ namespace UYK.BLL.Services.Abstract
 {
     public interface IClassTypeService : IServiceBase<ClassTypeDTO>
     {
+        public Dictionary<int, int> getClassCount();
     }
 }

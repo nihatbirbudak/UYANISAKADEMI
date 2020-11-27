@@ -44,8 +44,18 @@ namespace UYK.BLL.Services.UYKServices
 
         public CourseDTO getEntity(int entityId)
         {
-            var select = uow.GetRepository<Course>().Get(z => z.Id == entityId);
-            return MapperFactory.CurrentMapper.Map<CourseDTO>(select);
+            var select = uow.GetRepository<Course>().Get(z => z.Id == entityId,i => i.CourseClassTpyes,null);
+            var select1 = uow.GetRepository<Course>().Get(z => z.Id == entityId);
+            var mapped = MapperFactory.CurrentMapper.Map<CourseDTO>(select1);
+            mapped.ClassTypeDTOs = new List<ClassTypeDTO>();
+            
+            foreach (var i in select.FirstOrDefault().CourseClassTpyes)
+            {
+                var a = uow.GetRepository<ClassType>().Get(z => z.Id == i.Id);
+                var mapa = MapperFactory.CurrentMapper.Map<ClassTypeDTO>(a);
+                mapped.ClassTypeDTOs.Add(mapa);
+            }
+            return mapped;
         }
 
         public List<CourseDTO> getEntityName(string courseName)
@@ -59,6 +69,12 @@ namespace UYK.BLL.Services.UYKServices
             if (!uow.GetRepository<Course>().GetAll().Any(z => z.CourseName == entity.CourseName))
             {
                 var added = MapperFactory.CurrentMapper.Map<Course>(entity);
+                var cct = new List<CourseClassTpye>();
+                foreach (var classType in entity.ClassTypeDTOs)
+                {
+                    cct.Add(new CourseClassTpye { ClassTypeId = MapperFactory.CurrentMapper.Map<ClassType>(classType).Id, CourseId = MapperFactory.CurrentMapper.Map<Course>(entity).Id });
+                }
+                added.CourseClassTpyes = cct;
                 added = uow.GetRepository<Course>().Add(added);
                 uow.SaveChanges();
                 return MapperFactory.CurrentMapper.Map<CourseDTO>(added);
@@ -98,17 +114,17 @@ namespace UYK.BLL.Services.UYKServices
         /// 
         /// </summary>
         /// <returns></returns>
-        public Dictionary<int,IEnumerable<int>> getClassCount()
-        {
-            var list = uow.GetRepository<Course>().Get(null, z => z.CourseClassTpyes,null,null,null);
-            if (!list.Count().Equals(0))
-            {
-                var list2 = list.GroupBy(z => z.CourseClassTpyes);
-                var list3 = list2.ToDictionary(z => z.Key, z => z.Select(y => y.ClassTypeId));
-                return list3;
-            }
-            return null;
-        }
+        //public Dictionary<int,IEnumerable<int>> getClassCount()
+        //{
+        //    var list = uow.GetRepository<Course>().Get(null, z => z.CourseClassTpyes, null, null, null);
+        //    if (!list.Count().Equals(0))
+        //    {
+        //        var list2 = list.GroupBy(z => z.CourseClassTpyes );
+        //        var list3 = list2.ToDictionary(z => z.Key., z => z.Select(y => y.CourseClassTpyes));
+        //        return list;
+        //    }
+        //    return null;
+        //}
         
     }
 }

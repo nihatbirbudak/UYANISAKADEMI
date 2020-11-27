@@ -16,6 +16,7 @@ namespace UYK.Model
         public string CourseSubjects { get; set; }
         public DateTime UpdateTime { get; set; }
         public bool IsApply { get; set; }
+        public string Image { get; set; }
 
         public virtual List<CourseClassTpye> CourseClassTpyes { get; set; }
 

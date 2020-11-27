@@ -39,10 +39,14 @@
         <!-- /.footer end -->
 
     </div>
+    <!-- BEGIN CORE PLUGINS -->
     @RenderSection("FooterJsPlugin", false)
-
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
     @RenderSection("BeginPageJs", false)
-
+    <!-- END THEME GLOBAL SCRIPTS -->
+   
     <partial name="_scripts" />
+    @RenderSection("LastJs", false)
 </body>
 </html>

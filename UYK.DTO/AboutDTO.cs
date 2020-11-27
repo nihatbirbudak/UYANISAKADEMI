@@ -18,7 +18,7 @@ namespace UYK.DTO
         [Display(Name = "İcerik 2" , Prompt = "Bu Alana Hakkımızda Kısmı İle İlgili İcerikleri Giriniz")]
         public string Content2 { get; set; }
         [Display(Name = "Logo veya Fotograf")]
-        public string image { get; set; }
+        public string Image { get; set; }
 
         public DateTime UpdateDate { get; set; }
         public int CustomerId { get; set; }

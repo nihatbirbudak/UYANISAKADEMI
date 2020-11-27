@@ -1,7 +1,7 @@
 ﻿@model CourseViewModel
 
 @{
-    ViewData["Title"] = "CourseAdd";
+    ViewData["Title"] = "CourseDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,8 +37,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="font-weight-700 font-size-16" asp-for="CourseDTO.CourseCategoryTypeId"></label>
-                                        <select class="form-control" data-placeholder="Kategori Seçin" tabindex="1" asp-for="CourseDTO.CourseCategoryTypeId" asp-items="@(new SelectList(Model.CourseCategoryTypeDTOs,"Id","CategoryName"))" > 
-                                           
+                                        <select class="form-control" data-placeholder="Kategori Seçin" tabindex="1" asp-for="CourseDTO.CourseCategoryTypeId" asp-items="@(new SelectList(Model.CourseCategoryTypeDTOs,"Id","CategoryName"))">
                                         </select>
                                     </div>
                                 </div>
@@ -62,8 +61,17 @@
                                         <div class="demo-checkbox">
                                             @foreach (var classType in Model.ClassTypeDTOs)
                                             {
-                                                <input name="CourseList" type="checkbox" id="@("basic_checkbox_" + classType.Id)" value="@classType.Id">
-                                                <label for="@("basic_checkbox_" + classType.Id)">@classType.ClassName</label>
+                                                if (Model.CourseDTO.ClassTypeDTOs.Any(z => z.Id == classType.Id))
+                                                {
+                                                    <input name="CourseList" type="checkbox" checked id="@("basic_checkbox_" + classType.Id)" value="@classType.Id">
+                                                    <label for="@("basic_checkbox_" + classType.Id)">@classType.ClassName</label>
+                                                }
+                                                else
+                                                {
+                                                    <input name="CourseList" type="checkbox" id="@("basic_checkbox_" + classType.Id)" value="@classType.Id">
+                                                    <label for="@("basic_checkbox_" + classType.Id)">@classType.ClassName</label>
+                                                }
+
                                             }
                                         </div>
                                     </div>

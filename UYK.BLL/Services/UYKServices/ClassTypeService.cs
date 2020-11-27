@@ -44,7 +44,7 @@ namespace UYK.BLL.Services.UYKServices
 
         public ClassTypeDTO getEntity(int entityId)
         {
-            throw new NotImplementedException();
+            return mapDTO(getRepo().Get(z => z.Id == entityId));
         }
 
         public List<ClassTypeDTO> getEntityName(string entityName)
@@ -75,6 +75,15 @@ namespace UYK.BLL.Services.UYKServices
             return mapDTO(update);
         }
 
-        
+        public Dictionary<int, int> getClassCount()
+        {
+            var list = uow.GetRepository<ClassType>().Get(null,z => z.CourseClassTpyes,null,null,null);
+            if (!list.Count().Equals(0))
+            {
+                var listD = list.ToDictionary(z => z.Id, y => y.CourseClassTpyes.Count());
+                return listD;
+            }
+            return null;
+        }
     }
 }

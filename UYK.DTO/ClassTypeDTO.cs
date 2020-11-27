@@ -8,6 +8,6 @@ namespace UYK.DTO
         public string ClassName { get; set; }
         public string ClassContent { get; set; }
 
-        public List<CourseDTO> CourseDTOs { get; set; }
+        public virtual List<CourseDTO> CourseDTOs { get; set; }
     }
 }
