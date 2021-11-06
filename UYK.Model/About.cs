@@ -13,11 +13,11 @@ namespace UYK.Model
         public string Content2Title { get; set; }
         public string Content2 { get; set; }
         public string Image { get; set; }
-
-
         public DateTime UpdateDate { get; set; }
+
+
         [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

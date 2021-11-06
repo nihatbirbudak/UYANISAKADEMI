@@ -9,6 +9,11 @@ namespace UYK.DTO
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName 
+        { 
+            get { return getFullName(); }
+            set { }
+        }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
@@ -31,12 +36,21 @@ namespace UYK.DTO
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public int RoleId { get; set; }
         public bool RememberMe { get; set; }
 
+
+        public int RoleId { get; set; }
+
+        public virtual AboutDTO AboutDTO { get; set; }
+        public virtual List<ActivityDTO> ActivityDTOs { get; set; }
+        public virtual List<ComplaintDTO> ComplaintsDTO { get; set; }
         public virtual List<SupplierDTO> SupplierDTO { get; set; }
         public virtual List<OrderDTO> OrdersDTO { get; set; }
-        public virtual List<ComplaintDTO> ComplaintsDTO { get; set; }
         public virtual RoleDTO RoleDTO { get; set; }
+
+        public string getFullName()
+        {
+            return FullName = FirstName + " " + LastName;
+        }
     }
 }

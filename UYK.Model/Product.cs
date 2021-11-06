@@ -10,25 +10,26 @@ namespace UYK.Model
         
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        [ForeignKey("SupplierID")]
-        public int SupplierID { get; set; }
-        public int CategoryID { get; set; }
         public int UnitPrice { get; set; }
-        [ForeignKey("SizeID")]
-        public int SizeID { get; set; }
-        [ForeignKey("ColorID")]
-        public int ColorID { get; set; }
         public int Discount { get; set; }
         public string Picture { get; set; }
         public bool? DiscountAvailable { get; set; }
         public bool? CurrentOrder { get; set; }
-        public int? QuantityPerUnit { get; set; }
+        public int QuantityPerUnit { get; set; }
+  
+        public int? ActivityId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? SupplierId { get; set; }
+        public int? SizeId { get; set; }
+        public int? ColorId { get; set; }
 
+        public virtual Activity Activity { get; set; }
         public virtual Size Size { get; set; }
         public virtual Color Color { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public ICollection<OrderDetail> OrderDetail { get; set; }
-        public List<ProductCategories> ProductCategories { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
+        public virtual ICollection<ProductCategories> ProductCategories { get; set; }
+
 
     }
 }

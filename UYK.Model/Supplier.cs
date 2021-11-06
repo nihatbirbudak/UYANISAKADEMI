@@ -21,12 +21,15 @@ namespace UYK.Model
         public string DiscountType { get; set; }
         public int? DiscountRate { get; set; }
         public bool? DiscountAvailable { get; set; }
-        [ForeignKey("CustomerID")]
-        public int CustomerID { get; set; }
         public string Logo { get; set; }
         public string Note { get; set; }
 
+
+        public int? CustomerId { get; set; }
+
+
         public virtual Customer Customer { get; set; }
-        public virtual List<OrderDetail> OrderDetail { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

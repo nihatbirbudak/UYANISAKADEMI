@@ -11,9 +11,6 @@ namespace UYK.DTO
 
         public virtual List<ProductDTO> ProductDTO { get; set; }
 
-        public ColorDTO()
-        {
-            ProductDTO = new List<ProductDTO>();
-        }
+       
     }
 }

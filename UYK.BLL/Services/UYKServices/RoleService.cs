@@ -71,6 +71,17 @@ namespace UYK.BLL.Services.UYKServices
         }
 
         /// <summary>
+        /// It bring to "Role" entity according to the roleName you give.
+        /// </summary>
+        /// <param name="entityName">Enter the roleName</param>
+        /// <returns>Its return RoleDTO list</returns>
+        public RoleDTO getRoleName(string roleName)
+        {
+            var select = uow.GetRepository<Role>().Get(z => z.RoleName == roleName);
+            return MapperFactory.CurrentMapper.Map<RoleDTO>(select);
+        }
+
+        /// <summary>
         /// Its save to new "Role" entity if have not database.
         /// </summary>
         /// <param name="entity">Enter new RoleDTO entity</param>

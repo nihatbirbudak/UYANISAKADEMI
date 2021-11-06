@@ -7,8 +7,6 @@ namespace UYK.Model
 {
     public class Ordered : Entity<int>
     {
-        [ForeignKey("CustomerID")]
-        public int CustomerID { get; set; }
         public int OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
         public bool? Shipped { get; set; }
@@ -21,13 +19,10 @@ namespace UYK.Model
         public string Email { get; set; }
         public string Phone { get; set; }
 
+        public int CustomerId { get; set; }
 
-        public Customer Customer { get; set; }
-        public virtual List<OrderDetail> OrderDetail { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
 
-        public Ordered()
-        {
-            OrderDetail = new List<OrderDetail>();
-        }
     }
 }

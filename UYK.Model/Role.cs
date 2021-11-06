@@ -7,11 +7,8 @@ namespace UYK.Model
     {
         public string RoleName { get; set; }
 
-        public virtual List<Customer> Customer { get; set; }
+        public virtual ICollection<Customer> Customer { get; set; }
 
-        public Role()
-        {
-            Customer = new List<Customer>();
-        }
+
     }
 }

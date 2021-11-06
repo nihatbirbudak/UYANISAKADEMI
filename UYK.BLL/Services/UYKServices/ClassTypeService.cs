@@ -10,7 +10,7 @@ using UYK.Model;
 
 namespace UYK.BLL.Services.UYKServices
 {
-    public class ClassTypeService : IClassTypeService 
+    public class ClassTypeService : IClassTypeService
     {
         private readonly IUnitofWork uow;
         public ClassTypeService(IUnitofWork uow) => this.uow = uow;
@@ -54,7 +54,7 @@ namespace UYK.BLL.Services.UYKServices
 
         public ClassTypeDTO newEntity(ClassTypeDTO entity)
         {
-            if (!getRepo().GetAll().Any( z=> z.ClassName == entity.ClassName))
+            if (!getRepo().GetAll().Any(z => z.ClassName == entity.ClassName))
             {
                 var added = getRepo().Add(map(entity));
                 uow.SaveChanges();
@@ -77,7 +77,7 @@ namespace UYK.BLL.Services.UYKServices
 
         public Dictionary<int, int> getClassCount()
         {
-            var list = uow.GetRepository<ClassType>().Get(null,z => z.CourseClassTpyes,null,null,null);
+            var list = uow.GetRepository<ClassType>().Get(null, z => z.CourseClassTpyes, null, null, null);
             if (!list.Count().Equals(0))
             {
                 var listD = list.ToDictionary(z => z.Id, y => y.CourseClassTpyes.Count());
@@ -85,5 +85,68 @@ namespace UYK.BLL.Services.UYKServices
             }
             return null;
         }
+        public bool deleteClass(int id)
+        {
+            try
+            {
+                var list = uow.GetRepository<CourseClassTpye>().GetAll();
+                foreach (var item in list)
+                {
+                    if (item.CourseId.Equals(id))
+                    {
+                        uow.GetRepository<CourseClassTpye>().Delete(item);
+                        uow.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool deleteCourseClassTypeId(int id)
+        {
+            try
+            {
+                var list = uow.GetRepository<CourseClassTpye>().GetAll();
+                foreach (var item in list)
+                {
+                    if (item.Id.Equals(id))
+                    {
+                        uow.GetRepository<CourseClassTpye>().Delete(item);
+                        uow.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool whileChangeClasstype(CourseDTO courseDTO)
+        {
+            try
+            {
+                var course = uow.GetRepository<Course>().Get(z => z.Id == courseDTO.Id, z => z.CourseClassTpyes).FirstOrDefault();
+                foreach (var classTpye in course.CourseClassTpyes)
+                {
+                    deleteCourseClassTypeId(classTpye.Id);
+                }
+                foreach (var classType in courseDTO.ClassTypeDTOs)
+                {
+                    uow.GetRepository<CourseClassTpye>().Add(new CourseClassTpye { ClassTypeId = MapperFactory.CurrentMapper.Map<ClassType>(classType).Id, CourseId = MapperFactory.CurrentMapper.Map<Course>(courseDTO).Id });
+                    uow.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
     }
+
 }

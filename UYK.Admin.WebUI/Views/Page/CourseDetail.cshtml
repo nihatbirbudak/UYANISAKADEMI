@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "CourseDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string src = Model.CourseDTO.Image == null ? "../../images/product/product-9.png" : "../../images/MyImg/EducationImg/" + Model.CourseDTO.Image;
 }
 
 <section class="content">
@@ -14,11 +15,12 @@
                     <h4 class="box-title">Kurs Oluşturucu</h4>
                 </div>
                 <div class="box-body">
-                    <form asp-action="CourseAdd" enctype="multipart/form-data">
+                    <form asp-action="CourseDetail" enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <input asp-for="CourseDTO.Id" type="hidden" />
                                         <label class="font-weight-700 font-size-16" asp-for="CourseDTO.CourseName"></label>
                                         <input type="text" class="form-control" asp-for="CourseDTO.CourseName">
                                     </div>
@@ -138,8 +140,9 @@
                                 <div class="col-md-3">
                                     <h4 class="box-title mt-20">Resim Yükle</h4>
                                     <div class="product-img text-left">
-                                        <img src="../../images/product/product-9.png" alt="">
+                                        <img src="@src" alt="">
                                         <div class="btn btn-lg btn-info mb-20">
+                                            <input asp-for="CourseDTO.Image" type="hidden" />
                                             <span>Upload Anonther Image</span>
                                             <input type="file" asp-for="File" class="upload">
                                         </div>

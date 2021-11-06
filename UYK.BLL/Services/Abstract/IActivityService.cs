@@ -6,8 +6,7 @@ using UYK.DTO;
 
 namespace UYK.BLL.Services.Abstract
 {
-    public  interface IRoleService : IServiceBase<RoleDTO>
+    public interface IActivityService : IServiceBase<ActivityDTO>
     {
-        public RoleDTO getRoleName(string roleName);
     }
 }

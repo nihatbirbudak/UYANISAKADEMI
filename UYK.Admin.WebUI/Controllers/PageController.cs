@@ -50,7 +50,7 @@ namespace UYK.WebUI.Admin.Controllers
         {
             AddFile(file, aboutDTO);
             aboutDTO.CustomerId = CurrentUser.ID;
-            aboutDTO.UpdateDate = DateTime.UtcNow;
+            aboutDTO.UpdateDate = DateTime.Now;
             aboutService.newEntity(aboutDTO);
             return RedirectToAction("AboutUpdate");
         }
@@ -68,11 +68,11 @@ namespace UYK.WebUI.Admin.Controllers
         {
             if (aboutDTO.Image != null)
             {
-                DeleteFile(file, aboutDTO);
+                DeleteFile(aboutDTO);
             }
             AddFile(file, aboutDTO);
             aboutDTO.CustomerId = CurrentUser.ID;
-            aboutDTO.UpdateDate = DateTime.UtcNow;
+            aboutDTO.UpdateDate = DateTime.Now;
             aboutService.updateEntity(aboutDTO);
             return RedirectToAction("AboutUpdate");
         }
@@ -162,7 +162,7 @@ namespace UYK.WebUI.Admin.Controllers
         }
         #endregion
 
-        #region Course Class
+        #region Course Class Eğitim Kategorisi
         public IActionResult ClassTypeAdd(int id)
         {
             CourseClassTypeViewModel model = new CourseClassTypeViewModel();
@@ -197,7 +197,6 @@ namespace UYK.WebUI.Admin.Controllers
         #endregion
 
         #region Course Setting
-
         public IActionResult CourseAdd()
         {
             CourseViewModel model = new CourseViewModel();
@@ -216,8 +215,8 @@ namespace UYK.WebUI.Admin.Controllers
                 courseDTO.ClassTypeDTOs.Add(s);
             }
             AddFile(File, courseDTO);
-            courseDTO.CustomerId = CurrentUser.ID;
-            courseDTO.UpdateTime = DateTime.UtcNow;
+            courseDTO.WhoUpdate = CurrentUser.FirstName +" "+ CurrentUser.LastName;
+            courseDTO.UpdateTime = DateTime.Now;
             courseService.newEntity(courseDTO);
             return RedirectToAction("CourseAdd");
         }
@@ -239,11 +238,33 @@ namespace UYK.WebUI.Admin.Controllers
             model.ClassTypeDTOs = classTypeService.getAll();
             return View(model);
         }
+        [HttpPost]
+        public IActionResult CourseDetail(CourseDTO courseDTO, IFormFile file, List<int> CourseList)
+        {
+            courseDTO.ClassTypeDTOs = new List<ClassTypeDTO>();
+            foreach (var id in CourseList)
+            {
+                var s = classTypeService.getEntity(id);
+                courseDTO.ClassTypeDTOs.Add(s);
+            }
+            classTypeService.whileChangeClasstype(courseDTO);
+            DeleteFile(courseDTO);
+            AddFile(file, courseDTO);
+            courseDTO.WhoUpdate = CurrentUser.FirstName + " " + CurrentUser.LastName;
+            courseDTO.UpdateTime = DateTime.Now;
+            courseService.updateEntity(courseDTO);
+            return RedirectToAction("CourseList");
+        }
         
-
+        public IActionResult CourseDelete(int id)
+        {
+            var courseDTO = courseService.getEntity(id);
+            classTypeService.deleteClass(id);
+            DeleteFile(courseDTO);
+            courseService.deleteEntity(id);
+            return RedirectToAction("CourseList");
+        }
         #endregion
-
-
 
         #region  Methods
         public async void AddFile(IFormFile file, AboutDTO aboutDTO)
@@ -266,7 +287,7 @@ namespace UYK.WebUI.Admin.Controllers
             {
                 var extention = Path.GetExtension(file.FileName);
                 var randomName = string.Format($"{Guid.NewGuid()}{extention}");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", randomName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg\\EducationImg", randomName);
                 courseDTO.Image = randomName;
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -275,17 +296,21 @@ namespace UYK.WebUI.Admin.Controllers
             }
         }
 
-        public void DeleteFile(IFormFile file, CourseDTO courseDTO)
+        public void DeleteFile(CourseDTO courseDTO)
         {
-            var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", courseDTO.Image);
-            FileInfo fi = new FileInfo(pathDelete);
-            if (fi != null)
+            if (courseDTO.Image != null)
             {
-                System.IO.File.Delete(pathDelete);
-                fi.Delete();
+                var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg\\EducationImg", courseDTO.Image);
+                FileInfo fi = new FileInfo(pathDelete);
+                if (fi != null)
+                {
+                    System.IO.File.Delete(pathDelete);
+                    fi.Delete();
+                }
             }
+            
         }
-        public void DeleteFile(IFormFile file, AboutDTO aboutDTO)
+        public void DeleteFile(AboutDTO aboutDTO)
         {
             var pathDelete = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\MyImg", aboutDTO.Image);
             FileInfo fi = new FileInfo(pathDelete);

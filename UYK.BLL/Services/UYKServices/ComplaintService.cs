@@ -76,7 +76,7 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns>Its return ComplaintDTO or null</returns>
         public ComplaintDTO newEntity(ComplaintDTO entity)
         {
-            if (!uow.GetRepository<Complaint>().GetAll().Any(z=> z.Title == entity.Title && z.CustomerID == entity.CustomerID))
+            if (!uow.GetRepository<Complaint>().GetAll().Any(z=> z.Title == entity.Title && z.CustomerId == entity.CustomerId))
             {
                 var added = MapperFactory.CurrentMapper.Map<Complaint>(entity);
                 added = uow.GetRepository<Complaint>().Add(added);

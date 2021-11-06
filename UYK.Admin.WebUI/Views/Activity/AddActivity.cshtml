@@ -1,0 +1,251 @@
+﻿@model ActivityViewModel
+@{
+    ViewData["Title"] = "AddActivity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section BeginPage{
+    <!-- daterange picker -->
+    <link href="~/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+    <!-- bootstrap datepicker -->
+    <link href="~/assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="~/assets/vendor_plugins/iCheck/all.css">
+
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="~/assets/vendor_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="~/assets/vendor_plugins/timepicker/bootstrap-timepicker.min.css">
+
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="~/assets/vendor_components/bootstrap-select/dist/css/bootstrap-select.css">
+
+    <!-- Bootstrap tagsinput -->
+    <link rel="stylesheet" href="~/assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
+    <!-- Bootstrap touchspin -->
+    <link rel="stylesheet" href="~/assets/vendor_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/assets/vendor_components/select2/dist/css/select2.min.css">
+}
+<!-- vertical wizard -->
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h4 class="box-title">Etkinlik Oluşturucu</h4>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body wizard-content">
+        <form asp-action="AddActivity" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="location2" asp-for="ActivityDTO.CourseDTO.CourseName"></label>
+                        <select data-placeholder="Eğitim Şeçiniz" class="custom-select form-control" id="location2" asp-for="@Model.ActivityDTO.CourseId" asp-items="@(new SelectList(Model.CourseDTOs,"Id","CourseName"))">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="date2" asp-for="ActivityDTO.CustomerDTO"></label>
+                        <select data-placeholder="Eğitim Şeçiniz" class="custom-select form-control" id="location2" asp-for="@Model.ActivityDTO.CustomerId" asp-items="@(new SelectList(Model.CustomerDTOs,"ID","FullName"))">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="date2" asp-for="ProductDTO.SupplierId"></label>
+                        <select data-placeholder="Eğitim Şeçiniz" class="custom-select form-control" id="location2" asp-for="@Model.ProductDTO.SupplierId" asp-items="@(new SelectList(Model.SupplierDTOs,"ID","CompanyName"))">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date2" asp-for="ActivityDTO.StartTime"></label>
+                                <input type="date" class="form-control" id="date2" asp-for="@Model.ActivityDTO.StartTime">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date2" asp-for="ActivityDTO.StartClock"></label>
+                                <input type="time" class="form-control" asp-for="@Model.ActivityDTO.StartClock">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date2" asp-for="ActivityDTO.EndTime"></label>
+                                <input type="date" class="form-control" id="date2" asp-for="@Model.ActivityDTO.EndTime">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date2" asp-for="ActivityDTO.EndClock"></label>
+                                <input type="time" class="form-control" asp-for="@Model.ActivityDTO.EndClock">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date2" asp-for="ActivityDTO.IssueDate"></label>
+                        <input type="date" class="form-control" id="date2" asp-for="@Model.ActivityDTO.IssueDate">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date2" asp-for="ActivityDTO.EndIssue"></label>
+                        <input type="date" class="form-control" id="date2" asp-for="@Model.ActivityDTO.EndIssue">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="emailAddress2" asp-for="ProductDTO.QuantityPerUnit"></label>
+                        <input  type="text" asp-for="@Model.ProductDTO.QuantityPerUnit" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ActivityDTO.IsCertified"></label>
+                        <div class="c-inputs-stacked">
+                            <input type="radio" id="certificed_yes" name="IsCertified" value="1" asp-for="@Model.ActivityDTO.IsCertified">
+                            <label for="certificed_yes" class="block">Evet</label>
+                            <input type="radio" checked id="certificed_no" name="IsCertified" select value="0" asp-for="@Model.ActivityDTO.IsCertified">
+                            <label for="certificed_no" class="block">Hayır</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="emailAddress2" asp-for="ProductDTO.UnitPrice"></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">₺</span>
+                            <input type="text" asp-for="@Model.ProductDTO.UnitPrice" class="form-control">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="emailAddress2" asp-for="ProductDTO.Discount"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="checkbox" asp-for="@Model.ProductDTO.DiscountAvailable" id="addon_Checkbox_1">
+                            <label for="addon_Checkbox_1"
+                                   style="padding-left: 20px;height: 13px;">Uygula</label>
+                        </span>
+                        <input asp-for="@Model.ProductDTO.Discount" type="text" class="form-control">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ProductDTO.ProductName" for="jobTitle6"></label>
+                        <input type="text" class="form-control" asp-for="@Model.ProductDTO.ProductName" id="jobTitle6">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ActivityDTO.Tags" for="jobTitle6"></label>
+                        <div class="tags-default">
+                            <input type="text" asp-for="@Model.ActivityDTO.Tags" value="Spiritüal,Eğitim," data-role="tagsinput" placeholder="Etiket Ekle" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="ProductDTO.ProductDescription" for="shortDescription2"></label>
+                        <textarea asp-for="@Model.ProductDTO.ProductDescription" name="shortDescription" id="shortDescription2" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--/span-->
+                <div class="col-md-3">
+                    <h4 class="box-title mt-20">Resim Yükle</h4>
+                    <div class="product-img text-left">
+                        <img src="../../images/product/product-9.png" alt="">
+                        <div class="btn btn-lg btn-info mb-20">
+                            <span>Upload Anonther Image</span>
+                            <input type="file" asp-for="File" class="upload">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions mt-10">
+                <button type="submit" class="btn btn-lg btn-primary"> <i class="fa fa-check"></i>Kaydet</button>
+                <button asp-controller="Home" asp-action="Index" class="btn btn-lg btn-danger">İptal</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+@section LastJs{
+    <!-- steps  -->
+    <script src="../../assets/vendor_components/jquery-steps-master/build/jquery.steps.js"></script>
+
+    <!-- validate  -->
+    <script src="../../assets/vendor_components/jquery-validation-1.17.0/dist/jquery.validate.min.js"></script>
+
+    <!-- Sweet-Alert  -->
+    <script src="../../assets/vendor_components/sweetalert/sweetalert.min.js"></script>
+
+    <!-- wizard  -->
+    <script src="../js/pages/steps.js"></script>
+
+    <!-- Bootstrap 4.1-->
+    <script src="../../assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Select -->
+    <script src="../../assets/vendor_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+
+    <!-- Bootstrap tagsinput -->
+    <script src="../../assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+
+    <!-- Bootstrap touchspin -->
+    <script src="../../assets/vendor_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    <!-- Select2 -->
+    <script src="../../assets/vendor_components/select2/dist/js/select2.full.js"></script>
+
+    <!-- InputMask -->
+    <script src="../../assets/vendor_plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../../assets/vendor_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../../assets/vendor_plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+    <!-- date-range-picker -->
+    <script src="../../assets/vendor_components/moment/min/moment.min.js"></script>
+    <script src="../../assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- bootstrap datepicker -->
+    <script src="../../assets/vendor_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- bootstrap color picker -->
+    <script src="../../assets/vendor_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+
+    <!-- bootstrap time picker -->
+    <script src="../../assets/vendor_plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+    <!-- iCheck 1.0.1 -->
+    <script src="../../assets/vendor_plugins/iCheck/icheck.min.js"></script>
+
+    <!-- UltimatePro Admin for advanced form element -->
+    <script src="../js/pages/advanced-form-element.js"></script>
+}

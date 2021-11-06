@@ -11,9 +11,5 @@ namespace UYK.DTO
 
         public virtual List<CustomerDTO> CustomerDTO { get; set; }
 
-        public RoleDTO()
-        {
-            CustomerDTO = new List<CustomerDTO>();
-        }
     }
 }

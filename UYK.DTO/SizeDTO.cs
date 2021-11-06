@@ -10,12 +10,5 @@ namespace UYK.DTO
         public string SizeValue { get; set; }
 
         public virtual List<ProductDTO> ProductDTO { get; set; }
-
-
-        public SizeDTO()
-        {
-            ProductDTO = new List<ProductDTO>();
-
-        }
     }
 }

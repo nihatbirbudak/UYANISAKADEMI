@@ -51,7 +51,7 @@ namespace UYK.BLL.Services.UYKServices
             
             foreach (var i in select.FirstOrDefault().CourseClassTpyes)
             {
-                var a = uow.GetRepository<ClassType>().Get(z => z.Id == i.Id);
+                var a = uow.GetRepository<ClassType>().Get(z => z.Id == i.ClassTypeId);
                 var mapa = MapperFactory.CurrentMapper.Map<ClassTypeDTO>(a);
                 mapped.ClassTypeDTOs.Add(mapa);
             }
@@ -110,21 +110,7 @@ namespace UYK.BLL.Services.UYKServices
             return null;
             
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //public Dictionary<int,IEnumerable<int>> getClassCount()
-        //{
-        //    var list = uow.GetRepository<Course>().Get(null, z => z.CourseClassTpyes, null, null, null);
-        //    if (!list.Count().Equals(0))
-        //    {
-        //        var list2 = list.GroupBy(z => z.CourseClassTpyes );
-        //        var list3 = list2.ToDictionary(z => z.Key., z => z.Select(y => y.CourseClassTpyes));
-        //        return list;
-        //    }
-        //    return null;
-        //}
+        
         
     }
 }

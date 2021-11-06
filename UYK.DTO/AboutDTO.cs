@@ -19,8 +19,8 @@ namespace UYK.DTO
         public string Content2 { get; set; }
         [Display(Name = "Logo veya Fotograf")]
         public string Image { get; set; }
-
         public DateTime UpdateDate { get; set; }
+
         public int CustomerId { get; set; }
         public CustomerDTO CustomerDTO { get; set; }
     }

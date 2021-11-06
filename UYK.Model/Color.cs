@@ -7,11 +7,7 @@ namespace UYK.Model
     {
         public string ColorValue { get; set; }
 
-        public virtual List<Product> Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
 
-        public Color()
-        {
-            Product = new List<Product>();
-        }
     }
 }

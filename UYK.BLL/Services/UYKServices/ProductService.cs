@@ -77,16 +77,21 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns>Its return ProductDTO or null</returns>
         public ProductDTO newEntity(ProductDTO entity)
         {
-            if (!uow.GetRepository<Product>().GetAll().Any(z => z.ProductName == entity.ProductName && z.SizeID == entity.SizeID && z.ColorID == entity.ColorID))
+            if (entity.ActivityDTO != null )
             {
+                var activity = MapperFactory.CurrentMapper.Map<Activity>(entity.ActivityDTO);
                 var added = MapperFactory.CurrentMapper.Map<Product>(entity);
+                added.Activity = activity;
                 added = uow.GetRepository<Product>().Add(added);
                 uow.SaveChanges();
                 return MapperFactory.CurrentMapper.Map<ProductDTO>(added);
             }
             else
             {
-                return null;
+                var added = MapperFactory.CurrentMapper.Map<Product>(entity);
+                added = uow.GetRepository<Product>().Add(added);
+                uow.SaveChanges();
+                return MapperFactory.CurrentMapper.Map<ProductDTO>(added);
             }
         }
 

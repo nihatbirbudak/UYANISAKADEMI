@@ -33,13 +33,18 @@ namespace UYK.Model
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
         public DateTime? RegistrationDate { get; set; }
-        [ForeignKey("RoleId")]
-        public int RoleId { get; set; }
         public bool RememberMe { get; set; }
 
-        public virtual List<Supplier> Supplier { get; set; }
-        public virtual List<Order> Orders { get; set; }
-        public virtual List<Complaint> Complaints { get; set; }
-        public virtual Role Role { get; set; }
+
+        public int RoleId { get; set; }
+
+
+        public virtual About About { get; set; }
+        public virtual ICollection<Activity> Activitys { get; set; }
+        public virtual ICollection<Complaint> Complaints { get; set; }
+        public virtual ICollection<Supplier> Supplier { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Role Role{ get; set; }
+
     }
 }

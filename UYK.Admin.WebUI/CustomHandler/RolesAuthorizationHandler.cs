@@ -33,10 +33,12 @@ namespace UYK.WebUI.Admin.CustomHandler
                 var CustomerDTO = UYKConvert.UYKJsonDeSerializeUserDTO(claims.FirstOrDefault(z => z.Type == "CustomerDTO").Value);
                 var roles = requirement.AllowedRoles;
 
+                
                 if (roles.Contains(CustomerDTO.RoleDTO.RoleName))
                 {
                     validRole = true;
                 }
+                
             }
             if (validRole)
             {

@@ -17,17 +17,14 @@ namespace UYK.Model
         public DateTime UpdateTime { get; set; }
         public bool IsApply { get; set; }
         public string Image { get; set; }
+        public string WhoUpdate { get; set; }
 
-        public virtual List<CourseClassTpye> CourseClassTpyes { get; set; }
 
-
-        [ForeignKey("CustomerId")]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
-        [ForeignKey("CourseCategoryTypeId")]
         public int CourseCategoryTypeId { get; set; }
-        public CourseCategoryType CourseCategoryType { get; set; }
 
+
+        public virtual ICollection<Activity> Activitys { get; set; }
+        public virtual ICollection<CourseClassTpye> CourseClassTpyes { get; set; }
+        public virtual CourseCategoryType CourseCategoryType { get; set; } 
     }
 }

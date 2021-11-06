@@ -26,15 +26,16 @@ namespace UYK.DTO
         [Display(Name = "Yayında mı?")]
         public bool IsApply { get; set; }
         public string Image { get; set; }
+        public string WhoUpdate { get; set; }
 
-        [Display(Name ="Kurs Sınıfı")]
-        public virtual List<ClassTypeDTO> ClassTypeDTOs { get; set; }
-
-        public int CustomerId { get; set; }
-        public CustomerDTO CustomerDTO { get; set; }
 
         [Display(Name = "Kurs Kategorisi")]
         public int CourseCategoryTypeId { get; set; }
-        public CourseCategoryTypeDTO CourseCategoryTypeDTO { get; set; }
+
+
+        [Display(Name ="Kurs Sınıfı")]
+        public virtual List<ClassTypeDTO> ClassTypeDTOs { get; set; }
+        public virtual CourseCategoryTypeDTO CourseCategoryTypeDTO { get; set; }
+        public virtual List<ActivityDTO> ActivityDTOs { get; set; }
     }
 }

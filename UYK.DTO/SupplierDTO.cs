@@ -22,11 +22,15 @@ namespace UYK.DTO
         public string DiscountType { get; set; }
         public int? DiscountRate { get; set; }
         public bool? DiscountAvailable { get; set; }
-        public int CustomerID { get; set; }
         public string Logo { get; set; }
         public string Note { get; set; }
 
+
+        public int? CustomerId { get; set; }
+
+
         public virtual CustomerDTO CustomerDTO { get; set; }
         public virtual List<OrderDetailDTO> OrderDetailDTO { get; set; }
+        public virtual List<ProductDTO> ProductDTOs { get; set; }
     }
 }

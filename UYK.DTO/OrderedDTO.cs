@@ -7,7 +7,6 @@ namespace UYK.DTO
     public class OrderedDTO
     {
         public int ID { get; set; }
-        public int CustomerID { get; set; }
         public int OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
         public bool? Shipped { get; set; }
@@ -20,13 +19,9 @@ namespace UYK.DTO
         public string Email { get; set; }
         public string Phone { get; set; }
 
+        public int CustomerId { get; set; }
 
-        public CustomerDTO CustomerDTO { get; set; }
+        public virtual CustomerDTO CustomerDTO { get; set; }
         public virtual List<OrderDetailDTO> OrderDetailDTO { get; set; }
-
-        public OrderedDTO()
-        {
-            OrderDetailDTO = new List<OrderDetailDTO>();
-        }
     }
 }

@@ -32,66 +32,39 @@
                 <li><a asp-controller="Page" asp-action="ContactAdd"><i class="ti-more"></i>Düzenle</a></li>
             </ul>
         </li>
-        <!-- Eğitimler Ekle / Listele -->
+        <!-- İçerik İşlemleri -->
         <li class="treeview">
             <a href="#">
                 <i class="ti-write"></i>
-                <span>Eğitim Sayfa İşlemleri</span>
+                <span>İçerik İşlemleri</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a asp-controller="Page" asp-action="CourseAdd"><i class="ti-more"></i>Eğitim Ekle</a></li>
-                <li><a asp-controller="Page" asp-action="CourseList"><i class="ti-more"></i>Eğitimleri Listele</a></li>
+                <li><a asp-controller="Page" asp-action="CourseAdd"><i class="ti-more"></i>İçerik Ekle</a></li>
+                <li><a asp-controller="Page" asp-action="CourseList"><i class="ti-more"></i>İçerikleri Listele</a></li>
                 <li><a asp-controller="Page" asp-action="CourseCategoryAdd"><i class="ti-more"></i>Kategoriler</a></li>
-                <li><a asp-controller="Page" asp-action="ClassTypeAdd"><i class="ti-more"></i>Sınıf Tipleri</a></li>
+                <li><a asp-controller="Page" asp-action="ClassTypeAdd"><i class="ti-more"></i>Sınıflar</a></li>
             </ul>
         </li>
-        <!-- Seans Ekle / Listele -->
-        <li class="treeview">
-            <a href="#">
-                <i class="ti-dashboard"></i>
-                <span>Seans Sayfa İşlemleri</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-right pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Listele</a></li>
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ekle</a></li>
-            </ul>
-        </li>
-        <!-- Çalışma Ekle / Listele -->
-        <li class="treeview">
-            <a href="#">
-                <i class="ti-dashboard"></i>
-                <span>Çalışma Sayfa İşlemleri</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-right pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Listele</a></li>
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ekle</a></li>
-            </ul>
-        </li>
+        
 
         <!-- Eğitim İşlemleri -->
-        <li class="header nav-small-cap">Program Oluşturucu</li>
+        <li class="header nav-small-cap">Etkinlik Paneli</li>
 
-        <!-- Ders Ekle / Listele -->
+        <!-- Etkinlik Oluşturucu -->
         <li class="treeview">
             <a href="#">
                 <i class="ti-dashboard"></i>
-                <span>Ders Oluşturma</span>
+                <span>Kurs Oluşturma</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Dersleri Listele</a></li>
-                <li><a asp-controller="Page" asp-action="AboutAdd"><i class="ti-more"></i>Ders Oluştur</a></li>
+                <li><a asp-controller="Activity" asp-action="AddActivity"><i class="ti-more"></i>Etkinlik Ekle</a></li>
+                <li><a asp-controller="Activity" asp-action="ActivityList"><i class="ti-more"></i>Etkinlik Listele</a></li>
             </ul>
         </li>
 

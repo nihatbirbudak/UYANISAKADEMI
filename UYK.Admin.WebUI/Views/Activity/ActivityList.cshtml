@@ -1,0 +1,89 @@
+﻿@model ActivityViewModel
+
+@{
+    ViewData["Title"] = "ActivityList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section BeginPage {
+    <!-- Data Table-->
+    <link rel="stylesheet" type="text/css" href="../../assets/vendor_components/datatable/datatables.min.css" />
+}
+<div class="col-12">
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Eğitim Listesi</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="example5" class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="font-weight-bold">@Html.DisplayNameFor(z => z.ActivityDTO.ProductDTO.ProductName)</th>
+                            <th class="font-weight-bold">@Html.DisplayNameFor(z => z.ActivityDTO.StartTime)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.EndTime)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.IssueDate)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.EndIssue)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.CourseDTO.CourseName)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.CustomerDTO.FullName)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.ProductDTO.UnitPrice)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.ProductDTO.QuantityPerUnit)</th>
+                            <th>@Html.DisplayNameFor(z => z.ActivityDTO.ProductDTO.SupplierDTO.CompanyName)</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var activity in Model.ActivityDTOs)
+                        {
+                             
+                                var product = Model.ProductDTOs.FirstOrDefault(z => z.ActivityId == activity.Id);
+                                var customer = Model.CustomerDTOs.FirstOrDefault(z => z.ID == activity.CustomerId);
+                                var course = Model.CourseDTOs.FirstOrDefault(z => z.Id == activity.CourseId);
+                                var supplier = Model.SupplierDTOs.FirstOrDefault(z => z.ID == product.SupplierId);
+                               
+                            
+                        <tr>
+                            <td>@product.ProductName</td>
+                            <td> </td>
+                            <td>@activity.EndTime</td>
+                            <td>@activity.IssueDate</td>
+                            <td>@activity.EndIssue</td>
+                            <td>@course.CourseName</td>
+                            <td>@customer.FullName</td>
+                            <td>@product.UnitPrice</td>
+                            <td>@product.QuantityPerUnit</td>
+                            <td>@supplier.CompanyName</td>
+                            <td>
+                                <a asp-action="CourseDetail" asp-route-id="@activity.Id" class="btn btn-outline-primary btn-sm">İncele</a>
+                                <a asp-action="CourseDelete" asp-route-id="@activity.Id" class="btn btn-outline-danger btn-sm">Sil</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</div>
+
+@section LastJs {
+    <!-- This is data table -->
+    <script src="../../assets/vendor_components/datatable/datatables.min.js"></script>
+
+    <!-- UltimatePro Admin for Data Table -->
+    <script src="../js/pages/data-table.js"></script>
+}

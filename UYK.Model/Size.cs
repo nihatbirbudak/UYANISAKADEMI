@@ -7,13 +7,7 @@ namespace UYK.Model
     {
         public string SizeValue { get; set; }
 
-        public virtual List<Product> Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
 
-
-        public Size()
-        {
-            Product = new List<Product>();
-
-        }
     }
 }

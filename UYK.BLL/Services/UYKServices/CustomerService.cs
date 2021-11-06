@@ -158,7 +158,8 @@ namespace UYK.BLL.Services.UYKServices
         /// <returns></returns>
         public List<CustomerDTO> getAllUserinRole(int CustomerId)
         {
-            throw new NotImplementedException();
+            var List = uow.GetRepository<Customer>().Get(z => z.RoleId == CustomerId,null);
+            return MapperFactory.CurrentMapper.Map<List<CustomerDTO>>(List);
         }
 
         public void changeRememberMe(CustomerDTO customerDTO)

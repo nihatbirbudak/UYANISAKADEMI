@@ -42,6 +42,7 @@
                                 <td>@course.IsApply</td>
                                 <td>
                                     <a asp-action="CourseDetail" asp-route-id="@course.Id" class="btn btn-outline-primary btn-sm">İncele</a>
+                                    <a asp-action="CourseDelete" asp-route-id="@course.Id" class="btn btn-outline-danger btn-sm">Sil</a>
                                 </td>
                             </tr>
                         }

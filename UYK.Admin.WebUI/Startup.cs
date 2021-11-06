@@ -39,6 +39,9 @@ namespace UYK.Admin.WebUI
             services.AddSingleton<ICourseCategoryTypeService, CourseCategoryTypeService>();
             services.AddSingleton<ICourseService, CourseService>();
             services.AddSingleton<IClassTypeService, ClassTypeService>();
+            services.AddSingleton<IActivityService, ActivityService>();
+            services.AddSingleton<IProductService, ProductService>();
+            services.AddSingleton<ISupplierService, SupplierService>();
 
 
 
@@ -111,6 +114,11 @@ namespace UYK.Admin.WebUI
                      name: "AccessDenied",
                      pattern: "AccessDenied",
                      defaults: new { controller = "Login", action = "AccessDenied" });
+
+                endpoints.MapControllerRoute(
+                    name: "AddActivity",
+                    pattern: "Activity",
+                    defaults: new { controller = "Activity", action = "AddActivity" });
 
                 endpoints.MapControllerRoute(
                     name: "AboutList",
